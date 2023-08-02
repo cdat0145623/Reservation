@@ -1,0 +1,40 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background-color: var(--header-color);
+    font-size: 1.6rem;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+}
+.container {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+    justify-content: space-between;
+}
+
+.logo {
+    font-weight: 500;
+}
+
+.items {
+
+}
+
+.button {
+    margin-left: 20px;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: var(--button-text-color);
+    font-weight: 500;
+    font-size: 1.6rem;
+
+}

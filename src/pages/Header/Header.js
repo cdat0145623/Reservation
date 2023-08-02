@@ -1,0 +1,179 @@
+import classNames from 'classnames/bind';
+import styles from './Header.module.scss';
+import { useState } from 'react';
+import {
+    AirpostTaxiIcon,
+    AttractionIcon,
+    CalendarIcon,
+    CarRentalIcon,
+    FlightIcon,
+    HotelIcon,
+    PersonIcon,
+    StayIcon,
+} from '~/components/Icons';
+import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css';
+import { format } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+
+const cx = classNames.bind(styles);
+
+function Header() {
+    const [openDate, setOpenDate] = useState(false);
+    const [date, setDate] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection',
+        },
+    ]);
+    const [options, setOptions] = useState({
+        adult: 2,
+        children: 0,
+        room: 1,
+    });
+    const [openOptions, setOpenOptions] = useState(false);
+    const handleOption = (name, operation) => {
+        setOptions((prev) => {
+            return {
+                ...prev,
+                [name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
+            };
+        });
+    };
+    return (
+        <div className={cx('header')}>
+            <div className={cx('wrapper')}>
+                <div className={cx('list')}>
+                    <div className={cx('list-item', 'active')}>
+                        <StayIcon />
+                        <span>Stay</span>
+                    </div>
+
+                    <div className={cx('list-item')}>
+                        <FlightIcon />
+                        <span>Flight</span>
+                    </div>
+                    <div className={cx('list-item')}>
+                        <HotelIcon />
+                        <span>Flight + Hotel</span>
+                    </div>
+                    <div className={cx('list-item')}>
+                        <CarRentalIcon />
+                        <span>Car Rentala</span>
+                    </div>
+                    <div className={cx('list-item')}>
+                        <AttractionIcon />
+                        <span>Attractions</span>
+                    </div>
+                    <div className={cx('list-item')}>
+                        <AirpostTaxiIcon />
+                        <span>Airport Taxi</span>
+                    </div>
+                </div>
+                <h1 className={cx('title')}>Find your next stay</h1>
+                <p className={cx('description')}>Search deals on hotels, homes, and much more...</p>
+                <div className={cx('search')}>
+                    <div className={cx('search-item', 'active')}>
+                        <StayIcon />
+                        <input placeholder="Where are you going?" className={cx('search-input')} />
+                    </div>
+                    <div className={cx('search-item')}>
+                        <CalendarIcon />
+                        <span onClick={() => setOpenDate(!openDate)} className={cx('search-text')}>
+                            {`${format(date[0].startDate, 'dd/MM/yyyy')} to ${format(date[0].endDate, 'dd/MM/yyyy')} `}
+                        </span>
+                        {openDate && (
+                            <DateRange
+                                editableDateInputs={true}
+                                onChange={(item) => setDate([item.selection])}
+                                moveRangeOnFirstSelection={false}
+                                ranges={date}
+                                className={cx('date')}
+                            />
+                        )}
+                    </div>
+                    <div className={cx('search-item')}>
+                        <PersonIcon />
+                        <span
+                            className={cx('search-text')}
+                            onClick={() => setOpenOptions(!openOptions)}
+                        >{`${options.adult} adult . ${options.children} children . ${options.room} room`}</span>
+                        <FontAwesomeIcon icon={faAngleDown} className={cx('search-item-icon')} />
+
+                        {openOptions && (
+                            <div className={cx('options')}>
+                                <div className={cx('option-item')}>
+                                    <span className={cx('option-text')}>Adults</span>
+
+                                    <div className={cx('option-counter')}>
+                                        <button
+                                            className={cx('counter-btn')}
+                                            onClick={() => handleOption('adult', 'd')}
+                                            disabled={options.adult <= 1}
+                                        >
+                                            <FontAwesomeIcon icon={faMinus} />
+                                        </button>
+                                        <span className={cx('counter-number')}>{options.adult}</span>
+                                        <button
+                                            className={cx('counter-btn')}
+                                            onClick={() => handleOption('adult', 'i')}
+                                        >
+                                            <FontAwesomeIcon icon={faPlus} />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className={cx('option-item')}>
+                                    <span className={cx('option-text')}>Children</span>
+                                    <div className={cx('option-counter')}>
+                                        <button
+                                            className={cx('counter-btn')}
+                                            onClick={() => handleOption('children', 'd')}
+                                            disabled={options.children <= 0}
+                                        >
+                                            <FontAwesomeIcon icon={faMinus} />
+                                        </button>
+                                        <span className={cx('counter-number')}>{options.children}</span>
+                                        <button
+                                            className={cx('counter-btn')}
+                                            onClick={() => handleOption('children', 'i')}
+                                        >
+                                            <FontAwesomeIcon icon={faPlus} />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className={cx('option-item')}>
+                                    <span className={cx('option-text')}>Room</span>
+
+                                    <div className={cx('option-counter')}>
+                                        <button
+                                            className={cx('counter-btn')}
+                                            onClick={() => handleOption('room', 'd')}
+                                            disabled={options.room <= 1}
+                                        >
+                                            <FontAwesomeIcon icon={faMinus} />
+                                        </button>
+                                        <span className={cx('counter-number')}>{options.room}</span>
+                                        <button className={cx('counter-btn')} onClick={() => handleOption('room', 'i')}>
+                                            <FontAwesomeIcon icon={faPlus} />
+                                        </button>
+                                    </div>
+                                </div>
+                                <button className={cx('option-btn')} onClick={() => setOpenOptions(!openOptions)}>
+                                    Done
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                    <div className={cx('search-item')}>
+                        <button className={cx('search-btn')}>Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Header;

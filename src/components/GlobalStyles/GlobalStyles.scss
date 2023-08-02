@@ -1,0 +1,24 @@
+@import 'normalize.css';
+
+:root {
+    --header-color: #003580;
+    --text-color: #fff;
+    --button-text-color: #0071c2;
+    --icon-color: #6b6b6b;
+    --border-search-color: #febb02;
+
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+
+a {
+    text-decoration: none;
+}
