@@ -1,0 +1,133 @@
+.search-item {
+    border: 1px solid lightgray;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.searchItem-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.searchItem-description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 2;
+}
+
+.title {
+    font-size: 2rem;
+    color: var(--button-text-color);
+}
+
+.distance {
+    font-size: 1.2rem;
+}
+
+.taxiOp {
+    font-size: 1.2rem;
+    background-color: #008009;
+    color: #fff;
+    width: max-content;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.subTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.featured {
+    font-size: 1.2rem;
+}
+
+.cancelOp {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #008009;
+}
+
+.cancelOpSubtitle {
+    font-size: 1.2rem;
+    color: #008009;
+}
+
+.details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}  
+
+.ratings {
+    display: flex;
+    text-align: end;
+    justify-content: space-between;
+}
+
+.ratings > span {
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+.ratings > button {
+    font-size: 1.6rem;
+    background-color: var(--header-color);
+    color: #fff;
+    border: none;
+    padding: 4px;
+    border-radius: 4px;
+
+}
+
+.detail-text {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.taxOp {
+    font-size: 1.2rem;
+    color: var(--icon-color);
+    margin-bottom: 8px;
+}
+
+.searchView-button {
+    position: relative;
+}
+
+.check-btn {
+    color: #fff;
+    background-color: var(--button-text-color);
+    border: none;
+    border-radius: 2px;
+    font-size: 1.6rem;
+    padding: 8px 0px;
+    width: 100%;
+    cursor: pointer;
+    &:hover {
+        background-color: var(--header-color);
+    }
+}
+
+.detail-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1rem;
+}

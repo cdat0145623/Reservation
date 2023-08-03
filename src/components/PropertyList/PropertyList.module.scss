@@ -1,0 +1,35 @@
+.property-list {
+    display: flex;
+    max-width: 1024px;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+
+}
+
+.propertyList-item {
+    flex: 1;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 40px;
+    // overflow: hidden;
+}
+
+.propertyList-image {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.propertyList-titles {
+    margin-top: 4px;
+}
+
+.propertyList-titles >span {
+    color: var(--icon-color);
+    margin-top: 6px;
+    font-size: 1.4rem;
+}
+
+

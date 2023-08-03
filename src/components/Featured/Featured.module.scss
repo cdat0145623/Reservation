@@ -1,0 +1,30 @@
+.featured {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1024px;
+    gap: 20px;
+    z-index: 1;
+}
+
+.item {
+    position: relative;
+    color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 250px;
+}
+
+.featured-img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.title > h1 {
+    font-size: 2.4rem;
+}

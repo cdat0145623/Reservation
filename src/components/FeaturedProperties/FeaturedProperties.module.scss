@@ -1,0 +1,76 @@
+.featured-properties {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    max-width: 1024px;
+}
+
+.featuredProperties-item {
+    flex: 1;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.item-body {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0px 16px 10px;
+}
+
+.featuredProperties-image {
+    width: 100%;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.featuredProperties-name {
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+.featuredProperties-city {
+    font-size: 1.2rem;
+    color: var(--icon-color);
+    font-weight: 300;
+    margin: 4px 0;
+}
+
+
+
+.featuredProperties-rating {
+
+}
+
+.featuredProperties-rating > button {
+    background-color: var(--header-color);
+    color: #fff;
+    border: 1px solid var(--header-color);
+    border-radius: 4px;
+    padding: 2px;
+}
+.rating-point {
+    font-size: 1.4rem;
+    color: #333;
+    margin-left: 2px;
+}
+
+.rating-reviews {
+    font-size: 1.2rem;
+    color: var(--icon-color);
+    font-weight: 300;
+}
+
+.featuredProperties-price {
+    font-size: 1.2rem;
+    color: var(--icon-color);
+    text-align: end;
+}
+
+.featuredProperties-price > strong {
+    font-size: 1.6rem;
+    color: #000;
+    margin-right: 10px;
+}

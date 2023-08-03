@@ -9,7 +9,7 @@ function Navbar() {
     return (
         <div className={cx('navbar')}>
             <div className={cx('container')}>
-                <Link to="/home" className={cx('logo-link')}>
+                <Link to="/" className={cx('logo-link')}>
                     <img src={images.logo} alt=""></img>
                 </Link>
                 <div className={cx('items')}>
