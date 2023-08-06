@@ -1,11 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
 import connect from "./src/helpers/connection_mongodb.js";
-import hotelRoute from "./src/routes/HotelsRoute.js";
+import cors from "cors";
 import authRoute from "./src/routes/AuthRoute.js";
 import userRoute from "./src/routes/UsersRoute.js";
 import roomRoute from "./src/routes/RoomsRoute.js";
-
+import hotelRoute from "./src/routes/HotelsRoute.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -14,6 +14,7 @@ const app = express();
 
 connect();
 
+app.use(cors());
 app.use(cookieParser());
 
 app.use(express.json());
@@ -36,7 +37,7 @@ app.use((err, req, res, next) => {
     });
 });
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3005;
 
 app.listen(PORT, () => {
     console.log(`Server running on ${PORT}`);

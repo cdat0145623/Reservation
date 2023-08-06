@@ -7,6 +7,7 @@ import {
     createRoom,
     updateRoom,
     deleteRoom,
+    updateRoomAvailability
 } from "../controllers/RoomController.js";
 import { verifyAdmin } from "../helpers/jwt_service.js";
 
@@ -19,5 +20,7 @@ router.post("/:hotelId", verifyAdmin, createRoom);
 router.put("/:id", verifyAdmin, updateRoom);
 
 router.delete("/:id/:hotelId", verifyAdmin, deleteRoom);
+
+router.put('/availability/:id', updateRoomAvailability)
 
 export default router;

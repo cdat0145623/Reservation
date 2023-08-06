@@ -34,6 +34,7 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
     try {
         const user = await UserModel.findOne({ username: req.body.username });
+        console.log(user)
         if (!user) return next(createError(404, "User not found!"));
         const isValid = await user.checkPassword(req.body.password);
 
@@ -47,7 +48,7 @@ export const login = async (req, res, next) => {
             httpOnly: true,
         })
             .status(200)
-            .json({ others });
+            .json(others);
     } catch (error) {
         next(error);
     }
