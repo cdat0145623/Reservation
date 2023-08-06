@@ -26,6 +26,11 @@
     margin-top: 4px;
 }
 
+.propertyList-titles > h1 {
+    font-size: 1.8rem;
+    text-transform: capitalize;
+}
+
 .propertyList-titles >span {
     color: var(--icon-color);
     margin-top: 6px;

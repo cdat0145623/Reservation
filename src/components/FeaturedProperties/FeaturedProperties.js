@@ -1,28 +1,40 @@
-import images from '~/assets/images';
 import styles from './FeaturedProperties.module.scss';
 import classNames from 'classnames/bind';
+import useFetch from '../hooks/useFetch';
 
 const cx = classNames.bind(styles);
 
 function FeaturedProperties() {
+    const { data, loading } = useFetch('/api/hotels?featured=true&limit=4');
     return (
         <div className={cx('featured-properties')}>
-            <div className={cx('featuredProperties-item')}>
-                <img className={cx('featuredProperties-image')} src={images.apartHotel} alt="" />
-                <div className={cx('item-body')}>
-                    <span className={cx('featuredProperties-name')}>Aparthotel Stare Miasto</span>
-                    <span className={cx('featuredProperties-city')}>Old Town, Poland, Kraków</span>
-                    <div className={cx('featuredProperties-rating')}>
-                        <button>8.7</button>
-                        <span className={cx('rating-point')}> Excellent </span>
-                        <span className={cx('rating-reviews')}>. 2,427 reviews</span>
-                    </div>
-                </div>
-                <span className={cx('featuredProperties-price')}>
-                    Starting from <strong>VND&nbsp; 3,377,030</strong>
-                </span>
-            </div>
-            <div className={cx('featuredProperties-item')}>
+            {loading ? (
+                'loading...'
+            ) : (
+                <>
+                    {Array.isArray(data) &&
+                        data.map((item) => (
+                            <div className={cx('featuredProperties-item')} key={item._id}>
+                                <img className={cx('featuredProperties-image')} src={item.photos} alt="" />
+                                <div className={cx('item-body')}>
+                                    <span className={cx('featuredProperties-name')}>{item.name}</span>
+                                    <span className={cx('featuredProperties-city')}>{item.city}</span>
+                                    {item.rating && (
+                                        <div className={cx('featuredProperties-rating')}>
+                                            <button>{item.rating}</button>
+                                            <span className={cx('rating-point')}> Excellent </span>
+                                            <span className={cx('rating-reviews')}>. 2,427 reviews</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <span className={cx('featuredProperties-price')}>
+                                    Starting from <strong>VND&nbsp; 3,377,030</strong>
+                                </span>
+                            </div>
+                        ))}
+                </>
+            )}
+            {/* <div className={cx('featuredProperties-item')}>
                 <img className={cx('featuredProperties-image')} src={images.sevenApartHotel} alt="" />
                 <div className={cx('item-body')}>
                     <span className={cx('featuredProperties-name')}>7Seasons Apartments Budapest</span>
@@ -66,7 +78,7 @@ function FeaturedProperties() {
                 <span className={cx('featuredProperties-price')}>
                     Starting from <strong>VND&nbsp; 3,377,030</strong>
                 </span>
-            </div>
+            </div> */}
         </div>
     );
 }

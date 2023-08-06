@@ -1,0 +1,99 @@
+.reserve {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.418);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper {
+    background-color: #fff;
+    padding: 20px;
+    position: relative;
+}
+
+.reserve-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 20px;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 1.4rem;
+}
+
+.max {
+    font-size: 1.3rem;
+}
+
+.price {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.select-rooms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    color: #666;
+}
+
+.selectRoom-label {
+    color: var(--button-text-color);
+    font-size: 1.3rem;
+}
+.selectRoom-input {
+    margin-top: 12px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    &:disabled {
+        pointer-events: none;
+    }
+}
+
+.room {
+    display: flex;
+    flex-direction: column;
+}
+
+.reserve-btn {
+    border: none;
+    padding: 10px 20px;
+    background-color: var(--button-text-color);
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    color: #fff;
+}

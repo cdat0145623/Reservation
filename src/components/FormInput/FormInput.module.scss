@@ -1,0 +1,25 @@
+.form-input {
+    min-width: 250px;
+    padding: 12px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    background-color: #fff;
+    &:focus {
+        outline-color: var(--button-text-color);
+    }
+    
+    &:invalid[focused="true"] {
+        border: 1px solid var(--red-color);
+    }
+}
+
+.form-input:invalid[focused="true"] + .error-message {
+    display: block;
+}
+
+.error-message {
+    font-size: 1.3rem;
+    padding: 3px;
+    color: var(--red-color);
+    display: none;
+}
