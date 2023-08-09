@@ -1,0 +1,25 @@
+.wrapperChart {
+    flex: 4;
+    padding: 10px;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    .chart-grid {
+        stroke: rgb(228, 225, 225);
+    }
+}
+
+.title {
+    font-size: 1.6rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.wrapperChart.dark {
+    .title {
+        color: #fff;
+    }
+    .chart-grid {
+        stroke: rgba(228, 228, 228, 0.219);
+    }
+}

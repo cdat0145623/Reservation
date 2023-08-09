@@ -3,13 +3,16 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyles from "./components/GlobalStyles/GlobalStyles";
+import { DarkModeContextProvider } from "./components/context/DarkModeContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <GlobalStyles>
-            <App />
-        </GlobalStyles>
+        <DarkModeContextProvider>
+            <GlobalStyles>
+                <App />
+            </GlobalStyles>
+        </DarkModeContextProvider>
     </React.StrictMode>
 );
 

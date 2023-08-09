@@ -12,13 +12,19 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AddCardIcon from "@mui/icons-material/AddCard";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { DarkModeContext } from "../context/DarkModeContext";
 const cx = classnames.bind(styles);
 
 function Sidebar() {
+    const { darkMode, dispatch } = useContext(DarkModeContext);
     return (
-        <div className={cx("wrapper")}>
+        <div className={darkMode ? cx("wrapper", "dark") : cx("wrapper")}>
             <div className={cx("top")}>
-                <span className={cx("logo")}>Admin</span>
+                <Link to="/">
+                    <span className={cx("logo")}>Admin</span>
+                </Link>
             </div>
             <hr className={cx("border-bottom")} />
             <div className={cx("center")}>
@@ -32,10 +38,12 @@ function Sidebar() {
                         <span className={cx("name")}>Dashboard</span>
                     </li>
                     <p className={cx("title")}>LISTS</p>
-                    <li className={cx("item")}>
-                        <PersonOutlineOutlinedIcon className={cx("icon")} />
-                        <span className={cx("name")}>User</span>
-                    </li>
+                    <Link to="/users">
+                        <li className={cx("item")}>
+                            <PersonOutlineOutlinedIcon className={cx("icon")} />
+                            <span className={cx("name")}>User</span>
+                        </li>
+                    </Link>
                     <li className={cx("item")}>
                         <StoreIcon className={cx("icon")} />
                         <span className={cx("name")}>Product</span>
@@ -71,10 +79,12 @@ function Sidebar() {
                         <span className={cx("name")}>Settings</span>
                     </li>
                     <p className={cx("title")}>USER</p>
-                    <li className={cx("item")}>
-                        <AccountCircleOutlinedIcon className={cx("icon")} />
-                        <span className={cx("name")}>Profile</span>
-                    </li>
+                    <Link to="/users/new">
+                        <li className={cx("item")}>
+                            <AccountCircleOutlinedIcon className={cx("icon")} />
+                            <span className={cx("name")}>Profile</span>
+                        </li>
+                    </Link>
                     <li className={cx("item")}>
                         <ExitToAppOutlinedIcon className={cx("icon")} />
                         <span className={cx("name")}>Logout</span>
@@ -82,8 +92,14 @@ function Sidebar() {
                 </ul>
             </div>
             <div className={cx("bottom")}>
-                <div className={cx("color-options")}></div>
-                <div className={cx("color-options")}></div>
+                <div
+                    className={cx("color-options")}
+                    onClick={() => dispatch({ type: "LIGHT" })}
+                ></div>
+                <div
+                    className={cx("color-options")}
+                    onClick={() => dispatch({ type: "DARK" })}
+                ></div>
             </div>
         </div>
     );
