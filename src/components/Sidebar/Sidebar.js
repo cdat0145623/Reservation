@@ -15,10 +15,12 @@ import AddCardIcon from "@mui/icons-material/AddCard";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DarkModeContext } from "../context/DarkModeContext";
+import { AuthContext } from "../context/AuthContext";
 const cx = classnames.bind(styles);
 
 function Sidebar() {
     const { darkMode, dispatch } = useContext(DarkModeContext);
+    const { dispatchAuth } = useContext(AuthContext);
     return (
         <div className={darkMode ? cx("wrapper", "dark") : cx("wrapper")}>
             <div className={cx("top")}>
@@ -30,13 +32,12 @@ function Sidebar() {
             <div className={cx("center")}>
                 <ul>
                     <p className={cx("title")}>MAIN</p>
-                    <li className={cx("item")}>
-                        <DashboardIcon
-                            // style={{ fontSize: "2rem" }}
-                            className={cx("icon")}
-                        />
-                        <span className={cx("name")}>Dashboard</span>
-                    </li>
+                    <Link to="/">
+                        <li className={cx("item")}>
+                            <DashboardIcon className={cx("icon")} />
+                            <span className={cx("name")}>Dashboard</span>
+                        </li>
+                    </Link>
                     <p className={cx("title")}>LISTS</p>
                     <Link to="/users">
                         <li className={cx("item")}>
@@ -44,14 +45,18 @@ function Sidebar() {
                             <span className={cx("name")}>User</span>
                         </li>
                     </Link>
-                    <li className={cx("item")}>
-                        <StoreIcon className={cx("icon")} />
-                        <span className={cx("name")}>Product</span>
-                    </li>
-                    <li className={cx("item")}>
-                        <AddCardIcon className={cx("icon")} />
-                        <span className={cx("name")}>Orders</span>
-                    </li>
+                    <Link to="/hotels">
+                        <li className={cx("item")}>
+                            <StoreIcon className={cx("icon")} />
+                            <span className={cx("name")}>Hotel</span>
+                        </li>
+                    </Link>
+                    <Link to="/rooms">
+                        <li className={cx("item")}>
+                            <AddCardIcon className={cx("icon")} />
+                            <span className={cx("name")}>Rooms</span>
+                        </li>
+                    </Link>
                     <li className={cx("item")}>
                         <LocalShippingIcon className={cx("icon")} />
                         <span className={cx("name")}>Delivery</span>
@@ -79,13 +84,16 @@ function Sidebar() {
                         <span className={cx("name")}>Settings</span>
                     </li>
                     <p className={cx("title")}>USER</p>
-                    <Link to="/users/new">
+                    <Link to="/users/123">
                         <li className={cx("item")}>
                             <AccountCircleOutlinedIcon className={cx("icon")} />
                             <span className={cx("name")}>Profile</span>
                         </li>
                     </Link>
-                    <li className={cx("item")}>
+                    <li
+                        className={cx("item")}
+                        onClick={() => dispatchAuth({ type: "LOGOUT" })}
+                    >
                         <ExitToAppOutlinedIcon className={cx("icon")} />
                         <span className={cx("name")}>Logout</span>
                     </li>

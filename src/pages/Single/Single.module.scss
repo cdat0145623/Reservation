@@ -21,15 +21,29 @@
     position: relative;
 }
 
-.editButtom {
+.editButton {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 4px;
-    font-size: 1.3rem;
+    padding: 8px;
+    font-size: 1.6rem;
     color: var(--icon-color);
     background-color: #7551f821;
     border-radius: 0px 0px 0px 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    .edit-icon {
+        font-size: 2rem;
+    }
+    
+}
+
+
+
+.edit-text {
+    margin-left: 4px;
+    font-weight: 500;
 }
 
 .title {
@@ -90,4 +104,18 @@
     margin-bottom: 20px;
     font-size: 2rem;
     color: gray;
+}
+
+.wrapper.dark {
+    .title, .itemKey, .editButton, .detailTitle {
+        color: rgb(225, 225, 225);
+    }
+    .editButton {
+        background-color: #333;
+
+        &:hover {
+            border: 1px solid rgb(225, 225, 225);
+            border-radius: 4px;
+        }
+    }
 }

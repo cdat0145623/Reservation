@@ -1,22 +1,55 @@
 import classnames from "classnames/bind";
-import styles from "./New.module.scss";
+import styles from "./NewUser.module.scss";
 import Sidebar from "~/components/Sidebar/Sidebar";
 import Navbar from "~/components/Navbar/Navbar";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import { useState } from "react";
+import axios from "axios";
+import { userInputs } from "~/formsource";
 const cx = classnames.bind(styles);
 
-function New({ inputs, title }) {
+function NewUser() {
     const [file, setFile] = useState("");
+    const [info, setInfo] = useState({});
 
-    console.log(file);
+    const publicImage = "http://localhost:3003/images/";
+
+    const handleChange = (e) => {
+        setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    };
+    console.log(info);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = new FormData();
+        data.append("file", file);
+        data.append("upload_preset", "upload");
+        try {
+            const uploadRes = await axios.post(
+                "https://api.cloudinary.com/v1_1/dafyuivup/image/upload",
+                data
+            );
+            const { url } = uploadRes.data;
+
+            const newUser = {
+                ...info,
+                image: url,
+            };
+
+            const res = await axios.post("/api/users/", newUser);
+            console.log(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div className={cx("wrapper")}>
             <Sidebar />
             <div className={cx("container")}>
                 <Navbar />
                 <div className={cx("top")}>
-                    <h1 className={cx("title")}>{title}</h1>
+                    <h1 className={cx("title")}>Add new User</h1>
                 </div>
                 <div className={cx("bottom")}>
                     <div className={cx("left")}>
@@ -24,7 +57,7 @@ function New({ inputs, title }) {
                             src={
                                 file
                                     ? URL.createObjectURL(file)
-                                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                                    : publicImage + "default.jpeg"
                             }
                             alt=""
                             className={cx("image")}
@@ -50,7 +83,7 @@ function New({ inputs, title }) {
                                     onChange={(e) => setFile(e.target.files[0])}
                                 />
                             </div>
-                            {inputs.map((input) => (
+                            {userInputs.map((input) => (
                                 <div className={cx("formItem")} key={input.id}>
                                     <label className={cx("formLabel")}>
                                         {input.label}
@@ -59,11 +92,18 @@ function New({ inputs, title }) {
                                         type={input.type}
                                         className={cx("formInput")}
                                         placeholder={input.placeholder}
+                                        id={input.id}
+                                        onChange={handleChange}
                                     />
                                 </div>
                             ))}
 
-                            <button className={cx("button")}>Send</button>
+                            <button
+                                onClick={handleSubmit}
+                                className={cx("button")}
+                            >
+                                Send
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -72,4 +112,4 @@ function New({ inputs, title }) {
     );
 }
 
-export default New;
+export default NewUser;

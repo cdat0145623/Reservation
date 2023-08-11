@@ -47,6 +47,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     gap: 20px;
 }
 
@@ -66,13 +67,42 @@
 }
 
 .formInput {
+    margin-top: 8px;
     width: 100%;
-    padding: 4px;
+    padding: 6px;
     border: none;
     border-bottom: 1px solid gray;
     font-size: 1.4rem;
     
 }
+
+.featured-select {
+    margin-top: 8px;
+    padding: 6px;
+}
+
+.featured-option {
+
+}
+
+.selectRooms {
+    flex-direction: column;
+    width: 100%;
+    display: flex;
+
+}
+
+.selectRoom-option {
+    margin-top: 8px;
+    padding: 8px;
+    width: 100%;
+}
+
+.room-option {
+    height: 2.4rem;
+    cursor: pointer;
+}
+
 
 .button {
     width: 150px;
@@ -82,4 +112,5 @@
     font-weight: bold;
     color: #fff;
     font-size: 1.6rem;
+    cursor: pointer;
 }

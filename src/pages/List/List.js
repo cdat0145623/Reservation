@@ -6,13 +6,13 @@ import Datatable from "~/components/Datatable/Datatable";
 
 const cx = classnames.bind(styles);
 
-function List() {
+function List({ columns, title }) {
     return (
         <div className={cx("wrapper")}>
             <Sidebar />
             <div className={cx("container")}>
                 <Navbar />
-                <Datatable />
+                <Datatable columns={columns} title={title} />
             </div>
         </div>
     );

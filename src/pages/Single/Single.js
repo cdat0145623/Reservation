@@ -4,17 +4,28 @@ import Sidebar from "~/components/Sidebar/Sidebar";
 import Navbar from "~/components/Navbar/Navbar";
 import Chart from "~/components/Chart/Chart";
 import List from "~/components/Table/Table";
+import { useContext } from "react";
+import { DarkModeContext } from "~/components/context/DarkModeContext";
+import EditCalendarOutlinedIcon from "@mui/icons-material/EditCalendarOutlined";
 
 const cx = classnames.bind(styles);
 function Single() {
+    const { darkMode } = useContext(DarkModeContext);
     return (
-        <div className={cx("wrapper")}>
+        <div className={darkMode ? cx("wrapper", "dark") : cx("wrapper")}>
             <Sidebar />
             <div className={cx("container")}>
                 <Navbar />
                 <div className={cx("top")}>
                     <div className={cx("left")}>
-                        <div className={cx("editButtom")}>Edit</div>
+                        <div className={cx("editButton")}>
+                            <EditCalendarOutlinedIcon
+                                className={cx("edit-icon")}
+                            />
+                            <span className={cx("edit-text")}>
+                                Edit profile
+                            </span>
+                        </div>
                         <h1 className={cx("title")}>Information</h1>
                         <div className={cx("item")}>
                             <img

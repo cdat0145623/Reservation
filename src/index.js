@@ -4,15 +4,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyles from "./components/GlobalStyles/GlobalStyles";
 import { DarkModeContextProvider } from "./components/context/DarkModeContext";
+import { AuthContextProvider } from "./components/context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <DarkModeContextProvider>
-            <GlobalStyles>
-                <App />
-            </GlobalStyles>
-        </DarkModeContextProvider>
+        <AuthContextProvider>
+            <DarkModeContextProvider>
+                <GlobalStyles>
+                    <App />
+                </GlobalStyles>
+            </DarkModeContextProvider>
+        </AuthContextProvider>
     </React.StrictMode>
 );
 
