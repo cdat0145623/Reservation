@@ -16,7 +16,7 @@ export const userColumns = [
                         className={cx("cell-img")}
                         src={
                             params.row.image ||
-                            "https://htran844.github.io/hihi/img/ig/i7.jpg"
+                            "http://localhost:3003/images/" + params.row.image
                         }
                         alt="avatar"
                     />

@@ -14,22 +14,29 @@ import classNames from "classnames/bind";
 import "./components/Navbar/Navbar.module.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./components/context/DarkModeContext";
-import { AuthContext } from "./components/context/AuthContext";
 import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 import NewRoom from "./pages/newRoom/NewRoom";
 import NewHotel from "./pages/newHotel/NewHotel";
+import { AuthContext } from "./components/context/AuthContext";
+import jwt_decode from "jwt-decode";
+
 const cx = classNames.bind(styles);
 
 function App() {
     const { darkMode } = useContext(DarkModeContext);
 
-    const ProtectedRoute = ({ children }) => {
+    const ProtectRoute = ({ children }) => {
         const { user } = useContext(AuthContext);
 
-        if (!user) return <Navigate to="/login" />;
-
-        return children;
+        if (user?.length > 4) {
+            const decodedAccessToken = jwt_decode(user);
+            if (decodedAccessToken?.isAdmin) return children;
+            return <Navigate to="/login" />;
+        } else {
+            return <Navigate to="/login" />;
+        }
     };
+
     return (
         <div className={darkMode ? `${cx("app", "dark")}` : cx("app")}>
             <Router>
@@ -38,74 +45,74 @@ function App() {
                     <Route
                         path="/"
                         element={
-                            <ProtectedRoute>
+                            <ProtectRoute>
                                 <Home />
-                            </ProtectedRoute>
+                            </ProtectRoute>
                         }
                     />
                     <Route
                         path="/users"
                         element={
-                            <ProtectedRoute>
+                            <ProtectRoute>
                                 <List
                                     columns={userColumns}
                                     title="Add New User"
                                 />
-                            </ProtectedRoute>
+                            </ProtectRoute>
                         }
                     />
                     <Route
                         path="/users/:userId"
                         element={
-                            <ProtectedRoute>
+                            <ProtectRoute>
                                 <Single />
-                            </ProtectedRoute>
+                            </ProtectRoute>
                         }
                     />
                     <Route
                         path="/users/new"
                         element={
-                            <ProtectedRoute>
+                            <ProtectRoute>
                                 <NewUser />
-                            </ProtectedRoute>
+                            </ProtectRoute>
                         }
                     />
                     <Route
                         path="/hotels"
                         element={
-                            <ProtectedRoute>
+                            <ProtectRoute>
                                 <List
                                     columns={hotelColumns}
                                     title="Add New Hotel"
                                 />
-                            </ProtectedRoute>
+                            </ProtectRoute>
                         }
                     />
                     <Route
                         path="/hotels/new"
                         element={
-                            <ProtectedRoute>
+                            <ProtectRoute>
                                 <NewHotel />
-                            </ProtectedRoute>
+                            </ProtectRoute>
                         }
                     />
                     <Route
                         path="/rooms"
                         element={
-                            <ProtectedRoute>
+                            <ProtectRoute>
                                 <List
                                     columns={roomColumns}
                                     title="Add New Room"
                                 />
-                            </ProtectedRoute>
+                            </ProtectRoute>
                         }
                     />
                     <Route
                         path="/rooms/new"
                         element={
-                            <ProtectedRoute>
+                            <ProtectRoute>
                                 <NewRoom />
-                            </ProtectedRoute>
+                            </ProtectRoute>
                         }
                     />
                 </Routes>

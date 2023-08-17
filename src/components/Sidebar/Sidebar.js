@@ -15,12 +15,25 @@ import AddCardIcon from "@mui/icons-material/AddCard";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DarkModeContext } from "../context/DarkModeContext";
+import useFetch from "../hooks/useFetch";
+import jwt_decode from "jwt-decode";
 import { AuthContext } from "../context/AuthContext";
+
+import axios from "~/api/axios";
 const cx = classnames.bind(styles);
 
 function Sidebar() {
     const { darkMode, dispatch } = useContext(DarkModeContext);
     const { dispatchAuth } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
+    const { id } = jwt_decode(user);
+    const { data } = useFetch(`/api/users/${id}`);
+    const handleLogout = async () => {
+        await axios.get("/api/auth/logout", { withCredentials: true });
+        dispatchAuth({
+            type: "LOGOUT",
+        });
+    };
     return (
         <div className={darkMode ? cx("wrapper", "dark") : cx("wrapper")}>
             <div className={cx("top")}>
@@ -84,16 +97,13 @@ function Sidebar() {
                         <span className={cx("name")}>Settings</span>
                     </li>
                     <p className={cx("title")}>USER</p>
-                    <Link to="/users/123">
+                    <Link to={`/users/${data?._id}`}>
                         <li className={cx("item")}>
                             <AccountCircleOutlinedIcon className={cx("icon")} />
                             <span className={cx("name")}>Profile</span>
                         </li>
                     </Link>
-                    <li
-                        className={cx("item")}
-                        onClick={() => dispatchAuth({ type: "LOGOUT" })}
-                    >
+                    <li className={cx("item")} onClick={handleLogout}>
                         <ExitToAppOutlinedIcon className={cx("icon")} />
                         <span className={cx("name")}>Logout</span>
                     </li>

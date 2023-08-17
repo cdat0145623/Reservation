@@ -4,74 +4,108 @@ import Sidebar from "~/components/Sidebar/Sidebar";
 import Navbar from "~/components/Navbar/Navbar";
 import Chart from "~/components/Chart/Chart";
 import List from "~/components/Table/Table";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { DarkModeContext } from "~/components/context/DarkModeContext";
 import EditCalendarOutlinedIcon from "@mui/icons-material/EditCalendarOutlined";
+import { AuthContext } from "~/components/context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import Profile from "../Profile/Profile";
+import useFetch from "~/components/hooks/useFetch";
 
 const cx = classnames.bind(styles);
 function Single() {
     const { darkMode } = useContext(DarkModeContext);
+    const { user } = useContext(AuthContext);
+    const { id } = jwt_decode(user);
+    const [openModal, setOpenModal] = useState(false);
+
+    const { data, loading } = useFetch(`/api/users/${id}`);
+    const publicImage = "http://localhost:3003/images/";
+    const navigate = useNavigate();
+
+    const handleOpenModal = () => {
+        if (user) {
+            setOpenModal(true);
+        } else {
+            navigate("/login");
+        }
+    };
     return (
         <div className={darkMode ? cx("wrapper", "dark") : cx("wrapper")}>
             <Sidebar />
             <div className={cx("container")}>
                 <Navbar />
                 <div className={cx("top")}>
-                    <div className={cx("left")}>
-                        <div className={cx("editButton")}>
-                            <EditCalendarOutlinedIcon
-                                className={cx("edit-icon")}
-                            />
-                            <span className={cx("edit-text")}>
-                                Edit profile
-                            </span>
-                        </div>
-                        <h1 className={cx("title")}>Information</h1>
-                        <div className={cx("item")}>
-                            <img
-                                className={cx("item-img")}
-                                src="https://i.pinimg.com/originals/95/39/18/9539188d8df330758c9a3d99e73675be.jpg"
-                                alt="avatar"
-                            />
-                            <div className={cx("details")}>
-                                <h1 className={cx("detailTitle")}>Jonh</h1>
-                                <div className={cx("detailItem")}>
-                                    <span className={cx("itemKey")}>
-                                        Email:
-                                    </span>
-                                    <span className={cx("itemValue")}>
-                                        allmid@gmail.com
-                                    </span>
-                                </div>
-                                <div className={cx("detailItem")}>
-                                    <span className={cx("itemKey")}>
-                                        Phone:
-                                    </span>
-                                    <span className={cx("itemValue")}>
-                                        +0989020202
-                                    </span>
-                                </div>
-                                <div className={cx("detailItem")}>
-                                    <span className={cx("itemKey")}>
-                                        Address:
-                                    </span>
-                                    <span className={cx("itemValue")}>
-                                        177 35a Trinh Quang Nghi Street
-                                    </span>
-                                </div>
-                                <div className={cx("detailItem")}>
-                                    <span className={cx("itemKey")}>
-                                        Country:
-                                    </span>
-                                    <span className={cx("itemValue")}>USA</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {loading
+                        ? "Loading..."
+                        : data && (
+                              <div className={cx("left")}>
+                                  <div
+                                      className={cx("editButton")}
+                                      onClick={handleOpenModal}
+                                  >
+                                      <EditCalendarOutlinedIcon
+                                          className={cx("edit-icon")}
+                                      />
+                                      <span className={cx("edit-text")}>
+                                          Edit profile
+                                      </span>
+                                  </div>
+                                  <h1 className={cx("title")}>Information</h1>
+                                  <div className={cx("item")}>
+                                      <img
+                                          className={cx("item-img")}
+                                          src={
+                                              data?.image ||
+                                              publicImage + "default.jpeg"
+                                          }
+                                          alt="avatar"
+                                      />
+                                      <div className={cx("details")}>
+                                          <h1 className={cx("detailTitle")}>
+                                              {data.name}
+                                          </h1>
+                                          <div className={cx("detailItem")}>
+                                              <span className={cx("itemKey")}>
+                                                  Email:
+                                              </span>
+                                              <span className={cx("itemValue")}>
+                                                  {data.email}
+                                              </span>
+                                          </div>
+                                          <div className={cx("detailItem")}>
+                                              <span className={cx("itemKey")}>
+                                                  Phone:
+                                              </span>
+                                              <span className={cx("itemValue")}>
+                                                  {data.phone}
+                                              </span>
+                                          </div>
+                                          <div className={cx("detailItem")}>
+                                              <span className={cx("itemKey")}>
+                                                  Address:
+                                              </span>
+                                              <span className={cx("itemValue")}>
+                                                  {data.city}
+                                              </span>
+                                          </div>
+                                          <div className={cx("detailItem")}>
+                                              <span className={cx("itemKey")}>
+                                                  Country:
+                                              </span>
+                                              <span className={cx("itemValue")}>
+                                                  {data.country}
+                                              </span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          )}
                     <div className={cx("right")}>
                         <Chart
                             title="User spending (Last 6 month)"
-                            aspect={3 / 1}
+                            aspect={2 / 1}
                         />
                     </div>
                 </div>
@@ -80,6 +114,7 @@ function Single() {
                     <List />
                 </div>
             </div>
+            {openModal && <Profile setOpen={setOpenModal} userId={id} />}
         </div>
     );
 }

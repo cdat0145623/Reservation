@@ -10,11 +10,20 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { useContext } from "react";
 import { DarkModeContext } from "../context/DarkModeContext";
+import useFetch from "../hooks/useFetch";
+import jwt_decode from "jwt-decode";
+import { AuthContext } from "../context/AuthContext";
 
 const cx = classnames.bind(styles);
 
 function Navbar() {
     const { darkMode, dispatch } = useContext(DarkModeContext);
+    const { user } = useContext(AuthContext);
+    const { id } = jwt_decode(user);
+    // eslint-disable-next-line
+    const { data } = useFetch(`/api/users/${id}`);
+    const publicImage = "http://localhost:3003/images/";
+
     return (
         <div
             className={
@@ -61,7 +70,11 @@ function Navbar() {
                     </div>
                     <div className={cx("item")}>
                         <img
-                            src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
+                            src={
+                                data
+                                    ? data?.image
+                                    : publicImage + "default.jpeg"
+                            }
                             alt=""
                             className={cx("item-image")}
                         />

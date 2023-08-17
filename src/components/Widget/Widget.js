@@ -2,14 +2,14 @@ import classnames from "classnames/bind";
 import styles from "./Widget.module.scss";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import ApartmentIcon from "@mui/icons-material/Apartment";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import RoomPreferencesOutlinedIcon from "@mui/icons-material/RoomPreferencesOutlined";
+import { Link } from "react-router-dom";
 
 const cx = classnames.bind(styles);
 
-function Widget({ type }) {
-    const amount = 100;
+function Widget({ type, length }) {
     const diff = 20;
     let data;
     switch (type) {
@@ -17,7 +17,11 @@ function Widget({ type }) {
             data = {
                 title: "USERS",
                 isMoney: false,
-                link: "See all users",
+                link: (
+                    <Link to="/users" className={cx("link")}>
+                        <span className={cx("link-text")}>See all users</span>
+                    </Link>
+                ),
                 icon: (
                     <PersonOutlineIcon
                         className={cx("icon")}
@@ -29,13 +33,17 @@ function Widget({ type }) {
                 ),
             };
             break;
-        case "order":
+        case "hotel":
             data = {
-                title: "ORDERS",
+                title: "HOTELS",
                 isMoney: false,
-                link: "See all orders",
+                link: (
+                    <Link to="/hotels" className={cx("link")}>
+                        <span className={cx("link-text")}>See all hotels</span>
+                    </Link>
+                ),
                 icon: (
-                    <ShoppingCartOutlinedIcon
+                    <ApartmentIcon
                         className={cx("icon")}
                         style={{
                             color: "goldenrod",
@@ -45,13 +53,17 @@ function Widget({ type }) {
                 ),
             };
             break;
-        case "earning":
+        case "room":
             data = {
-                title: "EARNING",
-                isMoney: true,
-                link: "View net earnings",
+                title: "ROOMS",
+                isMoney: false,
+                link: (
+                    <Link to="/users" className={cx("link")}>
+                        <span className={cx("link-text")}>See all rooms</span>
+                    </Link>
+                ),
                 icon: (
-                    <MonetizationOnOutlinedIcon
+                    <RoomPreferencesOutlinedIcon
                         className={cx("icon")}
                         style={{
                             color: "green",
@@ -84,18 +96,18 @@ function Widget({ type }) {
     return (
         <div className={cx("wrapperWidget")}>
             <div className={cx("left")}>
-                <span className={cx("title")}>{data.title}</span>
+                <span className={cx("title")}>{data?.title}</span>
                 <span className={cx("counter")}>
-                    {data.isMoney && "$"} {amount}
+                    {data?.isMoney && "$"} {length ? length : null}
                 </span>
-                <span className={cx("link")}>{data.link}</span>
+                {data?.link}
             </div>
             <div className={cx("right")}>
                 <div className={cx("percentage")}>
                     <KeyboardArrowUpIcon className={cx("icon")} />
                     {diff}
                 </div>
-                {data.icon}
+                {data?.icon}
             </div>
         </div>
     );

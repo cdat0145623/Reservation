@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useContext, useLayoutEffect, useState } from "react";
 import { DarkModeContext } from "../context/DarkModeContext";
 import useFetch from "../hooks/useFetch";
-import axios from "axios";
+import axios from "~/api/axios";
 
 const cx = classnames.bind(styles);
 
@@ -13,7 +13,8 @@ function Datatable({ columns, title }) {
     const location = useLocation();
     const path = location.pathname.split("/")[1];
     const { darkMode } = useContext(DarkModeContext);
-    const { data } = useFetch(`/api/${path}`);
+    const { data, loading } = useFetch(`/api/${path}`);
+    console.log(data);
     const [list, setList] = useState();
 
     useLayoutEffect(() => {
@@ -58,19 +59,23 @@ function Datatable({ columns, title }) {
                     Add New
                 </Link>
             </div>
-            <DataGrid
-                className={cx("container")}
-                rows={list ? list : data}
-                columns={columns.concat(actionColumns)}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 9 },
-                    },
-                }}
-                pageSizeOptions={[9]}
-                checkboxSelection
-                getRowId={(row) => row._id}
-            />
+            {loading ? (
+                "Loading..."
+            ) : (
+                <DataGrid
+                    className={cx("container")}
+                    rows={list ? list : data}
+                    columns={columns.concat(actionColumns)}
+                    initialState={{
+                        pagination: {
+                            paginationModel: { page: 0, pageSize: 9 },
+                        },
+                    }}
+                    pageSizeOptions={[9]}
+                    checkboxSelection
+                    getRowId={(row) => row._id}
+                />
+            )}
         </div>
     );
 }

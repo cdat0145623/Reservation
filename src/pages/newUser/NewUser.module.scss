@@ -46,13 +46,40 @@
 .form {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     gap: 20px;
+    position: relative;
 }
 
 .formItem {
     width: 40%;
+    display: flex;
+    flex-direction: column;
+    
 }
+
+.instructions {
+    font-size: 1.3rem;
+    border-radius: 0.5rem;
+    border: 1px solid firebrick;
+    color: firebrick;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    
+    .errorModal-icon {
+        font-size: 1.8rem;
+        margin-right: 0.25rem;
+    }
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+
+
 
 .formLabel {
     display: flex;
@@ -65,6 +92,32 @@
     }
 }
 
+.wrapperInput {
+    position: relative;
+
+    .hide {
+        position: absolute;
+        bottom: 0;
+        display: none;
+    
+    }
+    
+    .valid {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: limegreen;
+        font-size: 2.4rem;
+    }
+    
+    .invalid {
+        color: var(--error-color);
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        font-size: 2.4rem;
+    }
+}
 .formInput {
     margin-top: 8px;
     width: 100%;
@@ -72,16 +125,42 @@
     border: none;
     border-bottom: 1px solid gray;
     font-size: 1.4rem;
+
     
 }
 
 .button {
-    width: 150px;
-    padding: 10px;
-    border: none;
-    background-color: teal;
-    font-weight: bold;
-    color: #fff;
-    font-size: 1.6rem;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    color: rgb(22, 24, 35);
+    border-color: rgba(22, 24, 35, 0.12);
+    background-color: var(--primary-color);
+    color: rgb(255,255,255);
+    min-height: 28px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    line-height: 24px;
+    padding: 12px 16px;
+    min-width: 160px;
+    height: 36px;
+    margin-left: 16px;
+    &:hover {
+        border: 2px solid var(--primary-color-hover);
+    }
+    &:disabled {
+        user-select: none;
+        pointer-events: none;
+        opacity: 0.5;
+    }
 }
+
+
+
+
+
+

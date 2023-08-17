@@ -1,22 +1,24 @@
 import classNames from "classnames/bind";
 import styles from "./Login.module.scss";
-import { useContext, useState } from "react";
-import axios from "axios";
-import { AuthContext } from "~/components/context/AuthContext";
+import { useState } from "react";
 import FormInput from "~/components/FormInput/FormInput";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "~/components/context/AuthContext";
+import { useContext } from "react";
+import axios from "~/api/axios";
+import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 
 const cx = classNames.bind(styles);
 
 function Login() {
+    const navigate = useNavigate();
+    const { dispatchAuth } = useContext(AuthContext);
+
     const [credentials, setCredentials] = useState({
         username: "",
         password: "",
     });
-
-    const { loading, dispatchAuth } = useContext(AuthContext);
-
-    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -24,22 +26,69 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatchAuth({ type: "LOGIN_START" });
         try {
-            const res = await axios.post("/api/auth/login", credentials);
-            console.log(res);
-            if (res.data.isAdmin) {
-                dispatchAuth({ type: "LOGIN_SUCCESS", payload: res.data });
-                navigate("/");
-            } else {
-                dispatchAuth({
-                    type: "LOGIN_FAILURE",
-                    payload: { message: "Your are not allowed" },
+            const res = await axios.post("/api/auth/login", credentials, {
+                withCredentials: true,
+            });
+            console.log(res.data);
+            if (res?.status === 200) {
+                const decodedToken = jwt_decode(res?.data?.access_token);
+                if (decodedToken?.isAdmin) {
+                    dispatchAuth({
+                        type: "LOGIN_SUCCESS",
+                        payload: res?.data?.access_token,
+                    });
+                    Swal.fire({
+                        position: "top",
+                        icon: "success",
+                        title: "Login successfully!",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 2000);
+                } else {
+                    dispatchAuth({
+                        type: "LOGIN_FAILURE",
+                        payload: { message: "You are not allowed!" },
+                    });
+                    Swal.fire({
+                        position: "top",
+                        icon: "error",
+                        title: "You are not allowed access to this page!",
+                        color: "#fe2c55",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+            }
+        } catch (error) {
+            console.log(error);
+            dispatchAuth({
+                type: "LOGIN_FAILURE",
+                payload: error.response.data,
+            });
+            if (error?.response?.status === 404) {
+                Swal.fire({
+                    position: "top",
+                    icon: "error",
+                    title: `${error?.response?.data?.message}`,
+                    color: "#fe2c55",
+                    showConfirmButton: false,
+                    timer: 1500,
                 });
             }
-        } catch (err) {
-            console.log(err.response.data);
-            dispatchAuth({ type: "LOGIN_FAILURE", payload: err.response.data });
+            if (error?.response?.status === 401) {
+                Swal.fire({
+                    position: "top",
+                    icon: "error",
+                    title: `${error?.response?.data?.message}`,
+                    color: "#fe2c55",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
         }
     };
 
@@ -75,11 +124,7 @@ function Login() {
                     errormessage="Password shout be 4-20 characters and include at least one letter and one number"
                     required={true}
                 />
-                <button
-                    disabled={loading}
-                    type="submit"
-                    className={cx("btn-login")}
-                >
+                <button type="submit" className={cx("btn-login")}>
                     Đăng nhập
                 </button>
             </form>

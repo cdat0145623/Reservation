@@ -1,0 +1,219 @@
+.modal {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper {
+    max-width: calc(100vw - 32px);
+    background-color: #fff;
+    border-radius: 8px;
+    min-width: 700px;
+    min-height: 650px;
+}
+
+.header-modal {
+    padding: 24px 24px 12px;
+    line-height: 36px;
+    border-bottom: 0.5px solid rgba(22, 24, 35, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .header-icon {
+        cursor: pointer;
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+    
+}
+
+.header-title {
+    font-size: 2.4rem;
+}
+
+
+.modal-body {
+    padding: 8px 24px 0px;
+}
+
+.modal-form {
+
+}
+
+.modal-item {
+    padding: 16px 0px;
+    border-bottom: 0.5px solid rgba(22, 24, 35, 0.2);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    
+    .hide {
+        display: none;
+    }
+    
+    .valid {
+        color: limegreen;
+        margin-left: 6px;
+        font-size: 2.4rem;
+    }
+    .invalid {
+        color: var(--error-color);
+        margin-left: 6px;
+        font-size: 2.4rem;
+    }
+}
+
+.modal-label {
+    line-height: 2.4rem;
+    font-size: 1.6rem;
+    width: 120px;
+    margin-right: 24px;
+    font-weight: 600;
+    
+}
+
+.modalWrapper-image {
+    margin-left: 128px;
+    position: relative;
+    .modalInner-image {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        cursor: pointer;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+    }
+    .modal-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+        background: rgb(255, 255, 255);
+        border: 1px solid rgb(208, 208, 211);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-left: 192px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+.modal-image {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+
+
+.modal-input {
+    width: 360px;
+    height: 38px;
+    border-radius: 4px;
+    background: rgba(22, 24, 35, 0.06);
+    caret-color: rgb(254, 44, 85);
+    font-size: 16px;
+    color: rgb(22, 24, 35);
+    line-height: 24px;
+    outline: none;
+    border: none;
+    padding: 7px 12px;
+    box-sizing: border-box;
+    position: relative;
+    &:focus {
+        background: rgba(22, 24, 35, 0.06);
+        outline: rgba(22, 24, 35, 0.2) solid 1.5px;
+    }
+}
+
+.instructions {
+    font-size: 1.3rem;
+    border-radius: 0.5rem;
+    border: 1px solid firebrick;
+    color: firebrick;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    
+    .errorModal-icon {
+        font-size: 1.8rem;
+        margin-right: 0.25rem;
+    }
+}
+
+
+.modal-footer {
+    height: 86px;
+    display: flex;
+    padding: 0px 24px;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    bottom: 0px;
+}
+
+.modal-button {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    color: rgb(22, 24, 35);
+    border-color: rgba(22, 24, 35, 0.12);
+    background-color: rgb(255, 255, 255);
+    min-height: 28px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    line-height: 24px;
+    padding: 7px 16px;
+    min-width: 96px;
+    height: 36px;
+    margin-left: 16px;
+    &:hover {
+        border-color: rgb(208, 209, 211);
+        background-color: rgb(248, 248, 248);
+    }
+
+}
+
+.modal-button.primary {
+    background-color: var(--primary-color);
+    color: rgb(255,255,255);
+    &:disabled {
+        user-select: none;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+
+
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}

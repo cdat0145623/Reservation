@@ -146,3 +146,36 @@ export const roomInputs = [
         placeholder: "2",
     },
 ];
+
+export const profileInputs = [
+    {
+        id: "name",
+        label: "Name",
+        type: "text",
+        placeholder: "John Smith",
+    },
+    {
+        id: "username",
+        label: "Username",
+        type: "text",
+        placeholder: "John",
+    },
+    {
+        id: "email",
+        label: "Email",
+        type: "email",
+        placeholder: "hotel",
+    },
+    {
+        id: "phone",
+        label: "Phone",
+        type: "text",
+        placeholder: "388930339",
+    },
+    {
+        id: "city",
+        label: "Address",
+        type: "text",
+        placeholder: "New York",
+    },
+];
