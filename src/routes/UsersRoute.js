@@ -6,12 +6,11 @@ import {
     updateUser,
     deleteUser,
 } from "../controllers/UserController.js";
-import {
-    verifyAccessToken,
-    verifyUser,
-    verifyAdmin,
-} from "../helpers/jwt_service.js";
+import { refreshToken } from "../controllers/AuthController.js";
+import { verifyUser, verifyAdmin } from "../helpers/jwt_service.js";
 const router = express.Router();
+
+router.get("/refreshToken", refreshToken);
 
 router.get("/", verifyAdmin, findAllUsers);
 

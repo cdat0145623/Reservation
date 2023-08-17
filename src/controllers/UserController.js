@@ -3,7 +3,7 @@ import UserModel from "../models/UserModel.js";
 export const findAllUsers = async (req, res, next) => {
     try {
         const users = await UserModel.find();
-        res.status(200).json({ users });
+        res.status(200).json(users);
     } catch (error) {
         next(error);
     }
@@ -29,13 +29,15 @@ export const createUser = async (req, res, next) => {
 
 export const updateUser = async (req, res, next) => {
     try {
-        const updatedUser = await UserModel.findByIdAndUpdate(
-            req.params.id,
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { _id: req.params.id },
             { $set: req.body },
             {
                 new: true,
             }
         );
+        if (req.body.password) await updatedUser.save();
+
         res.status(200).json(updatedUser);
     } catch (error) {
         next(error);
@@ -45,7 +47,7 @@ export const updateUser = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
     try {
         await UserModel.findByIdAndDelete(req.params.id);
-        res.status(200).json("Your account has been deleted");
+        res.status(200).json("User has been deleted");
     } catch (error) {
         next(error);
     }
