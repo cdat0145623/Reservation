@@ -5,15 +5,18 @@ import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './components/GlobalStyles/GlobalStyles';
 import { SearchContextProvider } from './components/context/SearchContext';
 import { AuthContextProvider } from './components/context/AuthContext';
+import { NavbarContextProvider } from './components/context/NavbarContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <AuthContextProvider>
-            <SearchContextProvider>
-                <GlobalStyles>
-                    <App />
-                </GlobalStyles>
-            </SearchContextProvider>
+            <NavbarContextProvider>
+                <SearchContextProvider>
+                    <GlobalStyles>
+                        <App />
+                    </GlobalStyles>
+                </SearchContextProvider>
+            </NavbarContextProvider>
         </AuthContextProvider>
     </React.StrictMode>,
 );

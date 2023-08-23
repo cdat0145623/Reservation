@@ -21,19 +21,19 @@ function Featured() {
             <div className={cx('item')}>
                 <img src={images.danang} alt="" className={cx('featured-img')} />
                 <div className={cx('title')}>
-                    <h1>Da nag</h1>
+                    <h1>Đà nẵng</h1>
                 </div>
             </div>
             <div className={cx('item')}>
                 <img src={images.hcm} alt="" className={cx('featured-img')} />
                 <div className={cx('title')}>
-                    <h1>HoChiMinh</h1>
+                    <h1>Hồ Chí Minh</h1>
                 </div>
             </div>
             <div className={cx('item')}>
                 <img src={images.hanoi} alt="" className={cx('featured-img')} />
                 <div className={cx('title')}>
-                    <h1>Ha noi</h1>
+                    <h1>Hà Nội</h1>
                 </div>
             </div>
         </div>

@@ -1,3 +1,5 @@
+
+
 .navbar {
     display: flex;
     align-items: center;
@@ -28,6 +30,34 @@
 
 }
 
+.info {
+    height: 40px;
+    min-width: 136px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+    border-radius: 4px;
+    &:hover {
+        background-color: #224F9F;
+    }
+    margin-left: 10px;
+}
+
+.image {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-icon-image);
+}
+
+.name {
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+
 .button {
     margin-left: 20px;
     border: none;
@@ -38,3 +68,115 @@
     font-size: 1.6rem;
 
 }
+
+.account {
+    background-color: #fff;
+    color: #333;
+    min-width: 240px;
+    border-radius: 8px;
+}
+
+.account-link {
+    color: #333;
+}
+
+.account-list {
+    list-style: none;
+}
+
+.account-item {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+        background-color: #F2F2F2;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+}
+
+.account-icon {
+    margin-right: 6px;
+    width: 2rem;
+    height: 2rem;
+}
+
+.account-text {
+    font-size: 1.4rem;
+}
+
+.wrapper {
+    justify-content: flex-end;
+    flex: 1;
+    display: flex;
+    height: 50px;
+    align-items: center;
+}
+
+.vnd {
+    padding: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: 600;
+    &:hover {
+        background-color: #224F9F;
+    }
+}
+
+.country {
+    margin-left: 4px;
+    padding: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: 600;
+    &:hover {
+        background-color: #224F9F;
+    }
+}
+
+.country-image {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.wrapper-icon {
+    margin-left: 4px;
+    padding: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: 600;
+    &:hover {
+        background-color: #224F9F;
+    }
+}
+
+.support-icon {
+    width: 2rem;
+    height: 2rem;
+}
+
+.notify-icon {
+    width: 2rem;
+    height: 2rem;
+}
+
+.wrapper-text {
+    margin-left: 4px;
+    padding: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: 600;
+    &:hover {
+        background-color: #224F9F;
+    }
+}
+
+.text {
+}  
+
+

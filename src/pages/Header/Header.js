@@ -14,7 +14,7 @@ import {
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css';
-import { format } from 'date-fns';
+import { format, addDays } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -27,11 +27,12 @@ function Header({ type }) {
     const [openDate, setOpenDate] = useState(false);
     const [dates, setDates] = useState([
         {
-            startDate: new Date(),
-            endDate: new Date(),
+            startDate: null,
+            endDate: null,
             key: 'selection',
         },
     ]);
+    console.log(dates);
     const [options, setOptions] = useState({
         adult: 2,
         children: 0,
@@ -100,14 +101,17 @@ function Header({ type }) {
                             <div className={cx('search-item')}>
                                 <CalendarIcon />
                                 <span onClick={() => setOpenDate(!openDate)} className={cx('search-text')}>
-                                    {`${format(dates[0].startDate, 'dd/MM/yyyy')} to ${format(
-                                        dates[0].endDate,
-                                        'dd/MM/yyyy',
-                                    )} `}
+                                    {dates[0]?.startDate && dates[0]?.endDate
+                                        ? `${format(dates[0].startDate, 'dd/MM/yyyy')} to ${format(
+                                              dates[0].endDate,
+                                              'dd/MM/yyyy',
+                                          )} `
+                                        : 'Ngày nhận phòng - Ngày trả phòng'}
                                 </span>
                                 {openDate && (
                                     <DateRange
                                         editableDateInputs={true}
+                                        minDate={addDays(new Date(), -1)}
                                         onChange={(item) => setDates([item.selection])}
                                         moveRangeOnFirstSelection={false}
                                         ranges={dates}

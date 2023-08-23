@@ -1,0 +1,54 @@
+.side-bar {
+    flex: 1;
+    margin-top: 12px;
+    margin-right: 16px;
+}
+
+.list {
+    list-style: none;
+    border: 1px solid var(--setting-border-color);
+    border-radius: 8px;
+
+}
+
+.item {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid var(--setting-border-color);
+    &.active {
+        color: var(--setting-text-color);
+    }
+    &:hover {
+        .icon {
+            color: var(--setting-text-color);
+        }
+        .text {
+            text-decoration: underline;
+            color: var(--setting-text-color);
+        }
+    }
+}
+
+.wrapper-icon {
+    background-color: #F5F5F5;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.icon {
+    color: currentColor;
+    width: 2rem;
+    height: 2rem;
+}
+
+.text {
+    font-size: 1.4rem;
+    
+}
