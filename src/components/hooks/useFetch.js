@@ -30,9 +30,10 @@ function useFetch(url) {
         };
         fetchData();
         // eslint-disable-next-line
-    }, [url]);
+    }, []);
 
     const reFetch = async () => {
+        console.log(url);
         setLoading(true);
         try {
             const res = await axios.get(url, { withCredentials: true });

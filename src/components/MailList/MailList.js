@@ -6,11 +6,13 @@ const cx = classNames.bind(styles);
 function MailList() {
     return (
         <div className={cx('mail')}>
-            <h2 className={cx('mail-title')}>Save time, save money!</h2>
-            <span className={cx('mail-description')}>Sign up and we'll send the best deals to you</span>
+            <h2 className={cx('mail-title')}>Tiết kiệm thời gian và tiền bạc!</h2>
+            <span className={cx('mail-description')}>
+                Hãy đăng ký và chúng tôi sẽ gửi những ưu đãi tốt nhất cho bạn
+            </span>
             <div className={cx('input-container')}>
-                <input className={cx('input-mail')} type="text" placeholder="Your email address" />
-                <button className={cx('mail-btn')}>Subcribe</button>
+                <input className={cx('input-mail')} type="text" placeholder="Địa chỉ email của bạn" />
+                <button className={cx('mail-btn')}>Đăng ký</button>
             </div>
         </div>
     );

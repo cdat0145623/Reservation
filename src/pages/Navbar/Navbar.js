@@ -11,8 +11,6 @@ import 'tippy.js/dist/tippy.css';
 import axios from '~/axios/axios';
 import jwt_decode from 'jwt-decode';
 import { NavbarContext } from '~/components/context/NavbarContext';
-import useFetchUser from '~/components/hooks/useFetchUser';
-import useAxiosPrivate from '~/components/hooks/useAxiosPrivate';
 const cx = classNames.bind(styles);
 
 function Navbar() {
@@ -20,8 +18,6 @@ function Navbar() {
     const { navbar, dispatchNav } = useContext(NavbarContext);
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState(false);
-
-    // console.log(navbar);
 
     useLayoutEffect(() => {
         if (user !== 'null') {
@@ -211,10 +207,10 @@ function Navbar() {
                         </div>
                         <div className={cx('items')}>
                             <Link to="/register">
-                                <button className={cx('button')}>Register</button>
+                                <button className={cx('button')}>Đăng ký</button>
                             </Link>
                             <Link to="/login">
-                                <button className={cx('button')}>Login</button>
+                                <button className={cx('button')}>Đăng nhập</button>
                             </Link>
                         </div>
                     </>

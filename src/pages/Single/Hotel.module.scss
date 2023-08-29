@@ -42,6 +42,11 @@
     gap: 10px;
 }
 
+.address-icon {
+    font-size: 2rem;
+    color: var(--button-text-color);
+}
+
 .distance {
     color: var(--button-text-color);
     font-weight: 600;
@@ -67,6 +72,7 @@
 
 .image-hotel {
     width: 100%;
+    height: 324px;
     object-fit: cover;
     cursor: pointer;
 }
@@ -171,5 +177,6 @@
 .slider-img {
     width: 80%;
     height: 80vh;
+    object-fit: cover;
 
 }

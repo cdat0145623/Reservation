@@ -1,11 +1,15 @@
 import styles from './PropertyList.module.scss';
 import classNames from 'classnames/bind';
 import useFetch from '../hooks/useFetch';
+import { stay } from '~/citys';
 
 const cx = classNames.bind(styles);
 
 function PropertyList() {
     const { data, loading } = useFetch('/api/hotels/countByType');
+    const name = (data, type) => {
+        return data?.find((item) => item?.type === type)?.name;
+    };
 
     const imagesArray = [
         'https://r-xx.bstatic.com/xdata/images/xphoto/263x210/57584488.jpeg?k=d8d4706fc72ee789d870eb6b05c0e546fd4ad85d72a3af3e30fb80ca72f0ba57&o=',
@@ -26,9 +30,9 @@ function PropertyList() {
                             <div className={cx('propertyList-item')} key={i}>
                                 <img src={img} alt="" className={cx('propertyList-image')} />
                                 <div className={cx('propertyList-titles')}>
-                                    <h1>{data[i]?.type}</h1>
+                                    <h1>{name(stay, data[i]?.type)}</h1>
                                     <span>
-                                        {data[i]?.count} {data[i]?.type}
+                                        {data[i]?.count} {name(stay, data[i]?.type)}
                                     </span>
                                 </div>
                             </div>

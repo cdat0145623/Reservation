@@ -3,13 +3,9 @@ import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
 import PropertyList from '~/components/PropertyList/PropertyList';
 import FeaturedProperties from '~/components/FeaturedProperties/FeaturedProperties';
-import { useContext } from 'react';
-import { NavbarContext } from '~/components/context/NavbarContext';
 
 const cx = classNames.bind(styles);
 function Home() {
-    const { navbar } = useContext(NavbarContext);
-    console.log(navbar);
     return (
         <div className={cx('wrapper')}>
             <Featured />

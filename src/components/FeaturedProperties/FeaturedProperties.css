@@ -1,6 +1,8 @@
 .slick-list {
     margin-right: -6px;
     margin-left: -6px;
+    /* min-height: 1050px; */
+    min-height: 400px;
 }
 
 .slick-slider.slick-initialized {

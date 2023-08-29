@@ -6,11 +6,17 @@ import './FeaturedProperties.css';
 import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import { useState } from 'react';
+import { citys } from '~/citys';
 const cx = classNames.bind(styles);
 
 function FeaturedProperties() {
     const { data, loading } = useFetch('/api/hotels');
     const [sliderRef, setSliderRef] = useState(null);
+    const city = (data, city) => {
+        return data.find((item) => item.value === city).city;
+    };
+
+    const publicImage = 'http://localhost:3003/public/img/';
 
     function NextArrow(props) {
         const { className, onClick } = props;
@@ -50,22 +56,22 @@ function FeaturedProperties() {
                                 <div className={cx('featuredProperties-item')} key={item?._id}>
                                     <img
                                         className={cx('featuredProperties-image')}
-                                        src="https://cf.bstatic.com/xdata/images/hotel/square600/87428762.webp?k=de5db8fe94cbfe08d3bf16d3c86def035fd73b43ee497cffe27b03363764e0e2&o="
+                                        src={publicImage + item?.photo[0]}
                                         alt=""
                                     />
                                     <div className={cx('item-body')}>
                                         <span className={cx('featuredProperties-name')}>{item?.name}</span>
-                                        <span className={cx('featuredProperties-city')}>{item?.city}</span>
+                                        <span className={cx('featuredProperties-city')}>{city(citys, item?.city)}</span>
                                         {item?.rating && (
                                             <div className={cx('featuredProperties-rating')}>
                                                 <button>{item?.rating}</button>
-                                                <span className={cx('rating-point')}> Excellent </span>
-                                                <span className={cx('rating-reviews')}>. 2,427 reviews</span>
+                                                <span className={cx('rating-point')}> Xuất sắc </span>
+                                                <span className={cx('rating-reviews')}>. 2,427 đánh giá</span>
                                             </div>
                                         )}
                                     </div>
                                     <span className={cx('featuredProperties-price')}>
-                                        Starting from <strong>VND&nbsp; 3,377,030</strong>
+                                        Bắt đầu từ <strong>VND&nbsp; {item?.cheapestPrice}</strong>
                                     </span>
                                 </div>
                             ))}

@@ -1,0 +1,32 @@
+.wrapper {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+    border-bottom: 2px solid #E7E7E7;
+}
+
+.destination {
+    .destination-icon {
+        font-size: 2.4rem;
+    }
+}
+
+
+
+.body {
+    margin-left: 8px;
+}
+
+.title {
+    font-size: 1.4rem;
+    color: #111;
+}
+
+.sub-title {
+    font-size: 1.3rem;
+    margin-top: 6px;
+}

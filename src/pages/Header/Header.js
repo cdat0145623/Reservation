@@ -19,10 +19,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { SearchContext } from '~/components/context/SearchContext';
+import Search from '~/components/layout/components/Search/Search';
 
 const cx = classNames.bind(styles);
 
 function Header({ type }) {
+    const [city, setCity] = useState('');
     const [destination, setDestination] = useState('');
     const [openDate, setOpenDate] = useState(false);
     const [dates, setDates] = useState([
@@ -32,7 +34,6 @@ function Header({ type }) {
             key: 'selection',
         },
     ]);
-    console.log(dates);
     const [options, setOptions] = useState({
         adult: 2,
         children: 0,
@@ -52,8 +53,8 @@ function Header({ type }) {
     };
     const { dispatch } = useContext(SearchContext);
     const handleSearch = () => {
-        dispatch({ type: 'NEW_SEARCH', payload: { destination, dates, options } });
-        navigate('/hotels', { state: { destination, dates, options } });
+        dispatch({ type: 'NEW_SEARCH', payload: { city, destination, dates, options } });
+        navigate('/hotels', { state: { city, destination, dates, options } });
     };
     return (
         <div className={cx('header')}>
@@ -61,42 +62,37 @@ function Header({ type }) {
                 <div className={cx('list')}>
                     <div className={cx('list-item', 'active')}>
                         <StayIcon />
-                        <span>Stay</span>
+                        <span>Lưu trú</span>
                     </div>
 
                     <div className={cx('list-item')}>
                         <FlightIcon />
-                        <span>Flight</span>
+                        <span>Chuyến bay</span>
                     </div>
                     <div className={cx('list-item')}>
                         <HotelIcon />
-                        <span>Flight + Hotel</span>
+                        <span>Chuyến bay + Khách sạn</span>
                     </div>
                     <div className={cx('list-item')}>
                         <CarRentalIcon />
-                        <span>Car Rentala</span>
+                        <span>Thuê xe</span>
                     </div>
                     <div className={cx('list-item')}>
                         <AttractionIcon />
-                        <span>Attractions</span>
+                        <span>Địa điểm tham quan</span>
                     </div>
                     <div className={cx('list-item')}>
                         <AirpostTaxiIcon />
-                        <span>Airport Taxi</span>
+                        <span>Taxi sân bay</span>
                     </div>
                 </div>
                 {type !== 'list' && (
                     <>
-                        <h1 className={cx('title')}>Find your next stay</h1>
-                        <p className={cx('description')}>Search deals on hotels, homes, and much more...</p>
+                        <h1 className={cx('title')}>Vi vu theo cách của bạn</h1>
+                        <p className={cx('description')}>Tìm kiếm nhà ở, khách sạn, căn hộ,...</p>
                         <div className={cx('search')}>
                             <div className={cx('search-item', 'active')}>
-                                <StayIcon />
-                                <input
-                                    placeholder="Where are you going?"
-                                    className={cx('search-input')}
-                                    onChange={(e) => setDestination(e.target.value)}
-                                />
+                                <Search destination={destination} setdestination={setDestination} setcity={setCity} />
                             </div>
                             <div className={cx('search-item')}>
                                 <CalendarIcon />
@@ -130,7 +126,7 @@ function Header({ type }) {
                                 {openOptions && (
                                     <div className={cx('options')}>
                                         <div className={cx('option-item')}>
-                                            <span className={cx('option-text')}>Adults</span>
+                                            <span className={cx('option-text')}>Người lớn</span>
 
                                             <div className={cx('option-counter')}>
                                                 <button
@@ -150,7 +146,7 @@ function Header({ type }) {
                                             </div>
                                         </div>
                                         <div className={cx('option-item')}>
-                                            <span className={cx('option-text')}>Children</span>
+                                            <span className={cx('option-text')}>Trẻ em</span>
                                             <div className={cx('option-counter')}>
                                                 <button
                                                     className={cx('counter-btn')}
@@ -169,7 +165,7 @@ function Header({ type }) {
                                             </div>
                                         </div>
                                         <div className={cx('option-item')}>
-                                            <span className={cx('option-text')}>Room</span>
+                                            <span className={cx('option-text')}>Phòng</span>
 
                                             <div className={cx('option-counter')}>
                                                 <button
@@ -192,14 +188,14 @@ function Header({ type }) {
                                             className={cx('option-btn')}
                                             onClick={() => setOpenOptions(!openOptions)}
                                         >
-                                            Done
+                                            Xong
                                         </button>
                                     </div>
                                 )}
                             </div>
                             <div className={cx('search-item')}>
                                 <button className={cx('search-btn')} onClick={handleSearch}>
-                                    Search
+                                    Tìm kiếm
                                 </button>
                             </div>
                         </div>

@@ -2,7 +2,6 @@ import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
 import { useContext, useState } from 'react';
 import { AuthContext } from '~/components/context/AuthContext';
-import Navbar from '../Navbar/Navbar';
 import FormInput from '~/components/FormInput/FormInput';
 import { useNavigate } from 'react-router-dom';
 import axios from '~/axios/axios';

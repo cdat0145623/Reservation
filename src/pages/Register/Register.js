@@ -2,7 +2,6 @@ import classNames from 'classnames/bind';
 import styles from './Register.module.scss';
 import { useContext, useState } from 'react';
 import { AuthContext } from '~/components/context/AuthContext';
-import Navbar from '../Navbar/Navbar';
 import FormInput from '~/components/FormInput/FormInput';
 import { useNavigate } from 'react-router-dom';
 import axios from '~/axios/axios';
@@ -60,7 +59,7 @@ function Register() {
             name: 'password',
             type: 'password',
             placeholder: 'Password',
-            errormessage: 'Mật khẩu bao gồm 20 ký tự và có ít nhất là 1 số',
+            errormessage: 'Mật khẩu có ít nhất 4 ký tự và có ít nhất là 1 số',
             label: 'Mật khẩu',
             pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*]{4,20}$`,
             required: true,
@@ -81,7 +80,6 @@ function Register() {
     const handleChange = (e) => {
         setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
     };
-    // console.log(credentials);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -146,7 +144,6 @@ function Register() {
     };
     return (
         <>
-            <Navbar />
             <div className={cx('register')}>
                 <form className={cx('wrapper')} onSubmit={handleSubmit}>
                     <span className={cx('title')}>Đăng ký</span>

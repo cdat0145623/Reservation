@@ -1,18 +1,18 @@
-import Navbar from '../Navbar/Navbar';
-import Header from '../Header/Header';
 import styles from './List.module.scss';
 import classNames from 'classnames/bind';
-import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useState, memo, useContext, useRef } from 'react';
 import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
 import SearchItem from '~/components/SearchItem/SearchItem';
 import useFetch from '~/components/hooks/useFetch';
+import Search from '~/components/layout/components/Search/Search';
+import { SearchContext } from '~/components/context/SearchContext';
 
 const cx = classNames.bind(styles);
 function List() {
     const location = useLocation();
-    // eslint-disable-next-line
+    const [city, setCity] = useState(location?.state?.city);
     const [destination, setDestination] = useState(location?.state?.destination);
     const [dates, setDates] = useState(location?.state?.dates);
     // eslint-disable-next-line
@@ -20,26 +20,44 @@ function List() {
     const [openDate, setOpenDate] = useState(false);
     const [min, setMin] = useState(undefined);
     const [max, setMax] = useState(undefined);
+    const { state, dispatch } = useContext(SearchContext);
+    const inputRef = useRef();
+    const navigate = useNavigate();
 
-    const { data, loading, reFetch } = useFetch(`/api/hotels?city=${destination}&min=${min || 1}&max=${max || 999}`);
-
-    const handleClick = () => {
-        reFetch();
+    const { data, loading, reFetch } = useFetch(`/api/hotels?city=${city}&min=${min || 100000}&max=${max || 2000000}`);
+    // console.log('location?.state::::', location?.state);
+    console.log('state:::::::', state);
+    const handleClick = (e) => {
+        e.preventDefault();
+        if (destination.length === 0) {
+            inputRef.current.focus();
+        } else if (!dates[0]?.startDate || !dates[0]?.endDate) {
+            setOpenDate(true);
+        } else {
+            reFetch();
+            dispatch({ type: 'NEW_SEARCH', payload: { city, destination, dates, options } });
+            navigate('/hotels', { state: { city, destination, dates, options } });
+        }
     };
-
     return (
         <div className={cx('container')}>
             <div className={cx('wrapper')}>
                 <div className={cx('search')}>
-                    <h1 className={cx('search-title')}>Search</h1>
-                    <div className={cx('listSearch-item')}>
-                        <label className={cx('search-label')}>Destination</label>
-                        <input className={cx('search-input')} type="text" placeholder={destination} />
+                    <h1 className={cx('search-title')}>Tìm kiếm</h1>
+                    <div>
+                        <Search
+                            inputRef={inputRef}
+                            type="list"
+                            destination={destination}
+                            setdestination={setDestination}
+                            setcity={setCity}
+                        />
                     </div>
+
                     <div className={cx('listSearch-item')}>
-                        <label className={cx('search-label')}>Check-in date</label>
+                        <label className={cx('search-label')}>Ngày nhận phòng</label>
                         <span onClick={() => setOpenDate(!openDate)}>
-                            {dates
+                            {dates[0].startDate !== null && dates[0].endDate !== null
                                 ? `${format(dates[0]?.startDate, 'dd/MM/yyyy')} to ${format(
                                       dates[0]?.endDate,
                                       'dd/MM/yyyy',
@@ -59,28 +77,30 @@ function List() {
                         <div className={cx('listSearch-Options')}>
                             <div className={cx('listOptions-item')}>
                                 <span>
-                                    Min price<small>&nbsp;per night</small>
+                                    Giá tiền từ<small>&nbsp;một đêm</small>
                                 </span>
                                 <br />
                                 <input
                                     type="number"
+                                    min={1}
                                     className={cx('listOptions-input')}
                                     onChange={(e) => setMin(e.target.value)}
                                 />
                             </div>
                             <div className={cx('listOptions-item')}>
                                 <span>
-                                    Max price<small>&nbsp;per night</small>
+                                    Giá tiền đến<small>&nbsp;một đêm</small>
                                 </span>
                                 <br />
                                 <input
                                     type="number"
+                                    min={1}
                                     className={cx('listOptions-input')}
                                     onChange={(e) => setMax(e.target.value)}
                                 />
                             </div>
                             <div className={cx('listOptions-item')}>
-                                <span>Adults</span>
+                                <span>Người lớn</span>
                                 <input
                                     type="number"
                                     min={1}
@@ -89,7 +109,7 @@ function List() {
                                 />
                             </div>
                             <div className={cx('listOptions-item')}>
-                                <span>Children</span>
+                                <span>Trẻ em</span>
                                 <input
                                     type="number"
                                     className={cx('listOptions-input')}
@@ -98,7 +118,7 @@ function List() {
                                 />
                             </div>
                             <div className={cx('listOptions-item')}>
-                                <span>Room</span>
+                                <span>Phòng</span>
                                 <input
                                     type="number"
                                     className={cx('listOptions-input')}
@@ -108,8 +128,8 @@ function List() {
                             </div>
                         </div>
                     </div>
-                    <button onClick={handleClick} className={cx('search-btn')}>
-                        Search
+                    <button type="submit" onClick={handleClick} className={cx('search-btn')}>
+                        Tìm kiếm
                     </button>
                 </div>
 
@@ -118,7 +138,20 @@ function List() {
                     {loading ? (
                         'loading'
                     ) : (
-                        <>{Array.isArray(data) && data.map((item) => <SearchItem item={item} key={item._id} />)}</>
+                        <>
+                            {Array.isArray(data) &&
+                                data.map((item) => (
+                                    <SearchItem
+                                        item={item}
+                                        key={item._id}
+                                        destination={destination}
+                                        city={city}
+                                        dates={dates}
+                                        options={options}
+                                        setOpenDate={setOpenDate}
+                                    />
+                                ))}
+                        </>
                     )}
                 </div>
             </div>
@@ -126,4 +159,4 @@ function List() {
     );
 }
 
-export default List;
+export default memo(List);

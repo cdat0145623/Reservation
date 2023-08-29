@@ -2,12 +2,10 @@ import classNames from 'classnames/bind';
 import styles from './Settings.module.scss';
 import { PersonalInfoIcon, SecurityIcon } from '~/components/Icons';
 import { useContext, useEffect, useState } from 'react';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { NavbarContext } from '~/components/context/NavbarContext';
-import useAxiosPrivate from '~/components/hooks/useAxiosPrivate';
 import { AuthContext } from '~/components/context/AuthContext';
 import jwt_decode from 'jwt-decode';
-import useFetchUser from '~/components/hooks/useFetchUser';
 import axios from '~/axios/axios';
 
 const cx = classNames.bind(styles);
@@ -15,20 +13,10 @@ const cx = classNames.bind(styles);
 function Settings() {
     const { dispatchNav } = useContext(NavbarContext);
     const { user } = useContext(AuthContext);
-    const location = useLocation();
-    const id = location.pathname.split('/')[2];
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
-    // const { data, loading, error } = useFetchUser(`/api/users/${id}`);
-    console.log(data);
-
-    console.log(id);
-
-    console.log(data);
-    console.log(loading);
 
     useEffect(() => {
-        console.log(2222);
         dispatchNav({ type: 'IS_USER', payload: { navbar: 'user' } });
         if (user !== 'null') {
             const { id } = jwt_decode(user);

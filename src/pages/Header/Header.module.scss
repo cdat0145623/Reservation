@@ -71,6 +71,9 @@
     height: 54px;
     margin-left: 20px;
 }
+.search-item.active {
+    margin-left: 0;
+}
 
 .search-item-icon {
     font-size: 1.4rem;
@@ -115,6 +118,8 @@
 }
 
 .search-btn {
+    height: max-content;
+    width: max-content;
     font-size: 2rem;
     border-radius: 2px;
     background-color: #0171C2;
@@ -122,6 +127,13 @@
     padding: 12px;
     border: none;
     cursor: pointer;
+    &:hover {
+        background-color: var(--header-color);
+    }
+    &:active {
+        transform: scale(0.96);
+        background-color: var(--header-color);
+    }
 }
 
 .options {

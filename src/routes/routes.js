@@ -10,6 +10,7 @@ import Register from '~/pages/Register/Register';
 import Settings from '~/pages/Settings/Settings';
 import Personal from '~/pages/Settings/Personal/Personal';
 import List from '~/pages/List/List';
+import Hotel from '~/pages/Single/Hotel';
 
 const publicRoutes = [
     { path: config.routes.home, component: Home },
@@ -18,6 +19,7 @@ const publicRoutes = [
     { path: config.routes.register, component: Register, layout: NavbarOnly },
     { path: config.routes.settings, component: Settings, layout: NavbarOnly },
     { path: config.routes.personal, component: Personal, layout: NavbarAndSidebar },
+    { path: config.routes.hotel, component: Hotel, layout: NavbarList },
 ];
 
 const privateRoutes = [];

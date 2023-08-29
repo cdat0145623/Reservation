@@ -8,6 +8,7 @@
 }
 
 .featuredProperties-item {
+    min-height: 360px;
     padding-bottom: 10px;
     width: calc(100%/4);
     gap: 10px;
@@ -27,6 +28,8 @@
 }
 
 .featuredProperties-image {
+    height: 240px;
+    object-fit: cover;
     width: 100%;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;

@@ -1,5 +1,3 @@
-import Navbar from '../Navbar/Navbar';
-import Header from '../Header/Header';
 import classNames from 'classnames/bind';
 import styles from './Hotel.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,27 +10,28 @@ import useFetch from '~/components/hooks/useFetch';
 import { SearchContext } from '~/components/context/SearchContext';
 import { AuthContext } from '~/components/context/AuthContext';
 import Reserve from '~/components/Reserve/Reserve';
+import { dayDifference } from './dayDifference';
 
 const cx = classNames.bind(styles);
+
 function Hotel() {
     const [open, setOpen] = useState(false);
     const [slideNumber, setSlideNumber] = useState(0);
     const [openModal, setOpenModal] = useState(false);
     const location = useLocation();
     const id = location.pathname.split('/')[2];
+    const navigate = useNavigate();
 
     const { data, loading } = useFetch(`/api/hotels/find/${id}`);
     const { user } = useContext(AuthContext);
 
-    const navigate = useNavigate();
+    const publicImage = 'http://localhost:3003/public/img/';
 
-    const { dates, options } = useContext(SearchContext);
-    const MILISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
-    function dayDifference(dayStart, dayEnd) {
-        const timeDiff = Math.abs(dayEnd?.getTime() - dayStart?.getTime());
-        const diffDays = Math.ceil(timeDiff / MILISECONDS_PER_DAY);
-        return diffDays;
-    }
+    // eslint-disable-next-line
+    const [dates, setDates] = useState(location?.state?.dates);
+    // eslint-disable-next-line
+    const [options, setOptions] = useState(location?.state?.options);
+    // const { dates, options } = useContext(SearchContext);
 
     const days = dayDifference(dates[0]?.startDate, dates[0]?.endDate);
 
@@ -40,14 +39,15 @@ function Hotel() {
         setSlideNumber(i);
         setOpen(true);
     };
+    const lengthPhoto = data?.photo?.length - 1;
 
     const handleMove = (direction) => {
         let newSlideNumber;
 
         if (direction === 'l') {
-            newSlideNumber = slideNumber === 0 ? 8 : slideNumber - 1;
+            newSlideNumber = slideNumber === 0 ? lengthPhoto : slideNumber - 1;
         } else {
-            newSlideNumber = slideNumber === 8 ? 0 : slideNumber + 1;
+            newSlideNumber = slideNumber === lengthPhoto ? 0 : slideNumber + 1;
         }
 
         setSlideNumber(newSlideNumber);
@@ -62,9 +62,6 @@ function Hotel() {
     };
     return (
         <div>
-            <Navbar />
-            <Header type="list" />
-
             {loading ? (
                 'loading'
             ) : (
@@ -83,7 +80,11 @@ function Hotel() {
                                     onClick={() => handleMove('l')}
                                 />
                                 <div className={cx('slider-wrapper')}>
-                                    <img src={data.photos[slideNumber]} alt="" className={cx('slider-img')} />
+                                    <img
+                                        src={publicImage + data.photo[slideNumber]}
+                                        alt=""
+                                        className={cx('slider-img')}
+                                    />
                                 </div>
                                 <FontAwesomeIcon
                                     icon={faCircleArrowRight}
@@ -96,21 +97,17 @@ function Hotel() {
                             <button className={cx('bookNow')}>Đặt căn hộ của bạn</button>
                             <h1 className={cx('title')}>{data.name}</h1>
                             <div className={cx('address')}>
-                                <FontAwesomeIcon icon={faLocationDot} />
+                                <FontAwesomeIcon icon={faLocationDot} className={cx('address-icon')} />
                                 <span>{data.address}</span>
                             </div>
-                            <span className={cx('distance')}>
-                                Nghinh Phong Cape is {data.distance} km from the apartment
-                            </span>
-                            <span className={cx('price')}>
-                                Book a stay over VND {data.cheapestPrice} at this property and get a free airport taxi
-                            </span>
+                            <span className={cx('distance')}></span>
+                            <span className={cx('price')}></span>
                             <div className={cx('images')}>
-                                {data.photos?.map((photo, index) => (
+                                {data?.photo?.map((img, index) => (
                                     <div className={cx('images-wrapper')} key={index}>
                                         <img
                                             onClick={() => handleOpen(index)}
-                                            src={photo}
+                                            src={publicImage + img}
                                             alt=""
                                             className={cx('image-hotel')}
                                         />
@@ -124,15 +121,20 @@ function Hotel() {
                                     <p className={cx('detail-description')}>{data.description}</p>
                                 </div>
                                 <div className={cx('detail-price')}>
-                                    <h1 className={cx('detail-info')}>Được giới thiệu cho 3 người lớn</h1>
+                                    <h1 className={cx('detail-info')}>Điểm nổi bật của chổ nghĩ</h1>
                                     <span className={cx('detail-introduce')}>
-                                        The air-conditioned apartment is composed of 2 separate bedrooms, a fully
-                                        equipped kitchen with a fridge and a stovetop, and 1 bathroom. Towels and bed
-                                        linen are available in the apartment.
+                                        Nhìn ra hồ bơi
+                                        <br />
+                                        Nhìn ra sông
+                                        <br />
+                                        Hồ bơi có tầm nhìn
+                                        <br />
+                                        Có chỗ đậu xe riêng trong khuôn viên
+                                        <br />
                                     </span>
-                                    <h2 className={cx('detail-final-price')}>
+                                    {/* <h2 className={cx('detail-final-price')}>
                                         <b>VND {days * data.cheapestPrice * options.room}</b> ({days} đêm)
-                                    </h2>
+                                    </h2> */}
                                     <button onClick={handleClick} className={cx('detail-btn')}>
                                         Đặt chỗ
                                     </button>
@@ -144,7 +146,7 @@ function Hotel() {
                     </div>
                 </>
             )}
-            {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
+            {openModal && <Reserve setOpen={setOpenModal} hotelId={id} days={days} options={options} />}
         </div>
     );
 }

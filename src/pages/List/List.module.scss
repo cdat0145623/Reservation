@@ -26,6 +26,10 @@
     color: #333;
     margin-bottom: 10px;
 }
+
+.search-result {
+    width: 250px;
+}
 .result {
     flex: 3;
 }
@@ -64,6 +68,7 @@
 .listOptions-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 10px;
     color: #555;
     font-size: 1.3rem;
@@ -88,6 +93,10 @@
     width: 100%;
     font-weight: 600;
     font-size: 1.6rem;
+    &:hover {
+        background-color: var(--header-color);
+    }
+
 }
 
 
