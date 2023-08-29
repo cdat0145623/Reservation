@@ -14,7 +14,6 @@ function Datatable({ columns, title }) {
     const path = location.pathname.split("/")[1];
     const { darkMode } = useContext(DarkModeContext);
     const { data, loading } = useFetch(`/api/${path}`);
-    console.log(data);
     const [list, setList] = useState();
 
     useLayoutEffect(() => {
@@ -22,7 +21,7 @@ function Datatable({ columns, title }) {
     }, [data]);
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`/api/${path}/${id}`);
+            await axios.delete(`/api/${path}/${id}`, { withCredentials: true });
 
             setList(list.filter((item) => item._id !== id));
             console.log(list);

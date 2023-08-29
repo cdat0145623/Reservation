@@ -19,8 +19,9 @@ function useAxiosPrivate() {
                 }
                 if (decodeToken.exp * 1000 < currentDate.getTime()) {
                     const data = await refresh();
-                    config.headers["Authorization"] =
-                        "Bearer " + data?.access_token;
+                    config.headers[
+                        "Authorization"
+                    ] = `Bearer ${data?.access_token}`;
                 }
                 return config;
             },
