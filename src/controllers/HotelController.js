@@ -2,12 +2,21 @@ import HotelModel from "../models/HotelModel.js";
 import RoomModel from "../models/RoomModel.js";
 
 export const findAllHotel = async (req, res, next) => {
-    const { min, max, limit, ...others } = req.query;
+    const { min, max, limit, city, ...others } = req.query;
     try {
-        const hotels = await HotelModel.find();
-        // const hotels = await HotelModel.find({...others,
-        //     cheapestPrice: {$gt: min || 1, $lt: max ||999}
-        // }).limit(limit);
+        let hotels = await HotelModel.find();
+        if (city) {
+            hotels = await HotelModel.find({
+                city: city,
+                cheapestPrice: { $gt: min || 100000, $lt: max || 2000000 },
+            });
+        }
+        if (limit) {
+            hotels = await HotelModel.find({
+                ...others,
+                cheapestPrice: { $gt: min || 1, $lt: max || 999 },
+            }).limit(limit);
+        }
         res.status(200).json(hotels);
     } catch (error) {
         next(error);

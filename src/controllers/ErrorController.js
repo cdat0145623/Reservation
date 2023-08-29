@@ -50,16 +50,15 @@ const sendErrorProd = (err, req, res) => {
 const handleError = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || "error";
-
+    // console.log("Hello this is error controller");
     if (process.env.NODE_ENV === "development") {
-        console.log("2");
         sendErrorDev(err, req, res);
     } else if (process.env.NODE_ENV === "production") {
-        console.log("Hello this middleware enviroment production");
-        console.log("Error enviroment production:::::", err);
+        // console.log("Hello this middleware enviroment production");
+        // console.log("Error enviroment production:::::", err);
         if (err.codeName === "DuplicateKey" || err.code === 11000)
             err = handleDuplicateFieldsDB(err);
-        console.log("Send error product::::::::::");
+        // console.log("Send error product::::::::::");
         sendErrorProd(err, req, res);
     }
 };

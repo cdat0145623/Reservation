@@ -7,19 +7,23 @@ import {
     deleteUser,
 } from "../controllers/UserController.js";
 import { refreshToken } from "../controllers/AuthController.js";
-import { verifyUser, verifyAdmin } from "../helpers/jwt_service.js";
+import {
+    verifyAccessToken,
+    verifyUser,
+    verifyAdmin,
+} from "../helpers/jwt_service.js";
 const router = express.Router();
 
 router.get("/refreshToken", refreshToken);
 
-router.get("/", verifyAdmin, findAllUsers);
+router.get("/", verifyAccessToken, verifyAdmin, findAllUsers);
 
-router.get("/:id", verifyUser, getUser);
+router.get("/:id", verifyAccessToken, verifyUser, getUser);
 
-router.post("/", verifyUser, createUser);
+router.post("/", verifyAccessToken, verifyUser, createUser);
 
-router.put("/:id", verifyUser, updateUser);
+router.put("/:id", verifyAccessToken, verifyUser, updateUser);
 
-router.delete("/:id", verifyUser, deleteUser);
+router.delete("/:id", verifyAccessToken, verifyUser, deleteUser);
 
 export default router;

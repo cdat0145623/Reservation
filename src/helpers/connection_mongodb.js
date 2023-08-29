@@ -4,6 +4,7 @@ dotenv.config();
 
 async function connect() {
     try {
+        console.log("connecting...");
         mongoose
             .connect(process.env.MONGO_URL, {
                 useNewUrlParser: true,

@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema(
         },
         country: {
             type: String,
-            required: true,
+            default: "Việt Nam",
         },
         image: {
             type: String,
@@ -45,12 +45,15 @@ const UserSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
+UserSchema.set("validateBeforeSave", false);
+
 UserSchema.pre("save", async function (next) {
     try {
         const salt = await bcrypt.genSalt(12);
         const hashPassword = await bcrypt.hash(this.password, salt);
         this.password = hashPassword;
     } catch (error) {
+        console.log(error);
         next(error);
     }
 });

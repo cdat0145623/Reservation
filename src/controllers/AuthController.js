@@ -1,5 +1,4 @@
 import UserModel from "../models/UserModel.js";
-import createError from "../utils/error.js";
 import {
     signAccessToken,
     signRefreshToken,
@@ -14,20 +13,18 @@ export const register = async (req, res, next) => {
 
         if (!req.body.username || !req.body.email || !password)
             return next(
-                createError(401, "username, email, password have to exist")
+                new AppError("username, email, password have to exist", 401)
             );
 
         const isUser = await UserModel.findOne({ username: req.body.username });
         const isEmail = await UserModel.findOne({ email: req.body.email });
-
         if (isUser || isEmail)
             return next(
-                createError(
-                    409,
-                    `${req.body.username} or ${req.body.email} is exist`
+                new AppError(
+                    `${req.body.username} or ${req.body.email} is exist`,
+                    409
                 )
             );
-
         const newUser = await UserModel.create({
             ...req.body,
             password,
@@ -61,13 +58,13 @@ export const login = async (req, res, next) => {
             httpOnly: false,
             sameSite: "None",
             secure: true,
-            expires: new Date(Date.now() + 60 * 60 * 1000),
+            expires: new Date(Date.now() + 3 * 60 * 60 * 1000),
         });
         res.cookie("refresh_token", refresh_token, {
             httpOnly: false,
             sameSite: "None",
             secure: true,
-            expires: new Date(Date.now() + 2 * 60 * 60 * 1000),
+            expires: new Date(Date.now() + 5 * 60 * 60 * 1000),
         })
             .status(200)
             .json({ access_token });
@@ -120,30 +117,6 @@ export const logout = async (req, res, next) => {
         }
         res.status(200).json({ message: "success" });
     } catch (error) {
-        console.log(error);
+        next(error);
     }
-};
-
-export const isLoggedIn = async (req, res, next) => {
-    if (req.cookies.access_token) {
-        try {
-            const decoded = await promisify(access_token.verify)(
-                req.cookies.access_token,
-                process.env.ACCESS_TOKEN_SECRET
-            );
-
-            const currentUser = await User.findById(decoded.id);
-            if (!currentUser) {
-                next();
-            }
-
-            req.user = currentUser;
-            res.locals.user = currentUser;
-
-            return next();
-        } catch (err) {
-            return next(err);
-        }
-    }
-    next();
 };

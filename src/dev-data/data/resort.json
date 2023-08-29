@@ -1,0 +1,183 @@
+[
+    {
+        "name": "Bazan Hotel Dalat",
+        "type": "resort",
+        "city": "dl",
+        "address": "36 To Hien Thanh , Đà Lạt, Việt Nam",
+        "distance": "10km",
+        "photo": ["hotel-1-1.jpeg", "hotel-1-2.jpeg","hotel-1-3.jpeg","hotel-1-4.jpeg","hotel-1-5.jpeg","hotel-1-6.jpeg","hotel-1-7.jpeg","hotel-1-8.jpeg"],
+        "description": "Tọa lạc tại thành phố Đà Lạt, cách Công viên Yersin 1,6 km, Bazan Hotel Dalat cung cấp chỗ nghỉ với khu vườn, chỗ đỗ xe riêng miễn phí và sảnh khách chung. Khách sạn 3 sao này có dịch vụ phòng, dịch vụ tiền sảnh, lễ tân 24 giờ, dịch vụ đưa đón sân bay, bếp chung và WiFi miễn phí trong toàn bộ khuôn viên.",
+        "rating": 9.0,
+        "cheapestPrice": 300000,
+        "featured": true
+    },
+    {
+        "name": "Dalat Wind Hotel",
+        "type": "resort",
+        "city": "dl",
+        "address": "Lot R2 03-04. Golf Valley, Ward 2, Đà Lạt, Việt Nam",
+        "distance": "10km",
+        "photo": ["hotel-2-1.jpeg", "hotel-2-2.jpeg","hotel-2-3.jpeg","hotel-2-4.jpeg","hotel-2-5.jpeg"],
+        "description": "Tọa lạc tại thành phố Đà Lạt, cách Hồ Xuân Hương 500 m, Dalat Wind Hotel là khách sạn 2 sao có lễ tân 24 giờ, sảnh khách chung, Wi-Fi và chỗ đỗ xe riêng miễn phí.Tại khách sạn, tất cả các phòng đều có bàn làm việc, TV màn hình phẳng, ấm đun nước và phòng tắm riêng với chậu rửa vệ sinh (bidet). Một số phòng còn có ban công.",
+        "rating": 8.7,
+        "cheapestPrice": 435000,
+        "featured": true
+    },{
+        "name": "Le Marais Hotel Dalat",
+        "type": "resort",
+        "city": "dl",
+        "address": "49/7 Đường Phạm Hồng Thái P.10, Đà Lạt, Việt Nam",
+        "distance": "2km",
+        "photo": ["hotel-3-1.jpeg", "hotel-3-2.jpeg","hotel-3-3.jpeg","hotel-3-4.jpeg","hotel-3-5.jpeg","hotel-3-6.jpeg","hotel-3-7.jpeg"],
+        "description": "Tọa lạc tại thành phố Đà Lạt, cách Hồ Xuân Hương 1,5 km, Le Marais Hotel Dalat cung cấp chỗ nghỉ với khu vườn, chỗ đỗ xe riêng miễn phí, sân hiên và nhà hàng. Khách sạn 4 sao này có bàn đặt tour và phòng giữ hành lý. Chỗ nghỉ cung cấp dịch vụ lễ tân 24 giờ, dịch vụ đưa đón sân bay, dịch vụ phòng và WiFi miễn phí trong toàn bộ khuôn viên.",
+        "rating": 8.0,
+        "cheapestPrice": 600000,
+        "featured": true
+    },{
+        "name": "TTR Central Apart Hotel",
+        "type": "resort",
+        "city": "dl",
+        "address": "4b Hải Thượng, Đà Lạt, Việt Nam",
+        "distance": "3km",
+        "photo": ["hotel-4-1.webp", "hotel-4-2.jpeg","hotel-4-3.jpeg","hotel-4-4.jpeg","hotel-4-5.jpeg","hotel-4-6.jpeg","hotel-4-7.jpeg","hotel-4-8.jpeg","hotel-4-9.jpeg"],
+        "description": "Tọa lạc tại thành phố Đà Lạt thuộc tỉnh Lâm Đồng, gần Quảng trường Lâm Viên và Biệt thự Hằng Nga (Ngôi nhà điên), TTR Central Apart Hotel cung cấp chỗ nghỉ với WiFi miễn phí và chỗ đỗ xe riêng miễn phí cũng như tiện nghi spa.",
+        "rating": 8.2,
+        "cheapestPrice": 900000,
+        "featured": true
+    },{
+        "name": "CAROLINE SEA HOTEL",
+        "type": "resort",
+        "city": "vt",
+        "address": "151 Đường Hoàng Hoa Thám, Vũng Tàu, Việt Nam",
+        "distance": "3km",
+        "photo": ["hotel-5-1.jpeg", "hotel-5-2.jpeg","hotel-5-3.jpeg","hotel-5-4.jpeg","hotel-5-5.jpeg","hotel-5-6.jpeg"],
+        "description": "Set in Vung Tau, 500 metres from Back Beach, CAROLINE SEA HOTEL provides accommodation with free WiFi and free private parking. The property is located 1.9 km from Front Beach, 2.6 km from Pineapple Beach and 2.2 km from Nghinh Phong Cape. The accommodation offers room service, a 24-hour front desk and currency exchange for guests.",
+        "rating": 9.0,
+        "cheapestPrice": 300000,
+        "featured": true
+    },
+    {
+        "name": "Queen Garden Hotel & Apartment",
+        "type": "resort",
+        "city": "vt",
+        "address": "H3 Phan Huy Chu ( A Chau Area, Hoang Hoa Tham ), Ward 2, Vũng Tàu, Việt Nam",
+        "distance": "4km",
+        "photo": ["hotel-6-1.jpeg", "hotel-6-2.jpeg","hotel-6-3.jpeg","hotel-6-4.jpeg","hotel-6-5.jpeg","hotel-6-6.jpeg","hotel-6-7.jpeg"],
+        "description": "Queen Garden Hotel & Apartment ở thành phố Vũng Tàu này cung cấp các phòng lắp máy điều hòa với tầm nhìn và Wi-Fi miễn phí. Nơi đây có lễ tân 24 giờ, chỗ đỗ xe riêng miễn phí và phòng giữ hành lý.",
+        "rating": 9.0,
+        "cheapestPrice": 300000,
+        "featured": true
+    },
+    {
+        "name": "Fati Boutique Hotel & Apartment",
+        "type": "resort",
+        "city": "vt",
+        "address": "112/3 Trần Phú Tòa nhà Fati Boutique, 112/3 Trần Phú, Phường 5, Vũng Tàu, Việt Nam",
+        "distance": "3km",
+        "photo": ["hotel-7-1.jpeg", "hotel-7-2.jpeg","hotel-7-3.jpeg","hotel-7-4.jpeg","hotel-7-5.jpeg","hotel-7-6.jpeg","hotel-7-7.jpeg","hotel-7-8.jpeg","hotel-7-9.jpeg"],
+        "description": "Tọa lạc tại thành phố Vũng Tàu, cách Bãi Dâu vài bước chân, Fati Boutique Hotel & Apartment cung cấp chỗ nghỉ với hồ bơi ngoài trời, chỗ đỗ xe riêng miễn phí, khu vườn, sân hiên và WiFi miễn phí. Khách sạn này nằm cách Bạch Dinh khoảng 2,8 km và Khu du lịch sinh thái-văn hóa Hồ Mây 5 km. Chỗ nghỉ cung cấp dịch vụ phòng và dịch vụ lễ tân 24 giờ cho khách.",
+        "rating": 7.4,
+        "cheapestPrice": 1100000,
+        "featured": true
+    },{
+        "name": "BOBO Boutique Hotel",
+        "type": "resort",
+        "city": "vt",
+        "address": "Tạ Uyên 09, Vũng Tàu, Việt Nam",
+        "distance": "3km",
+        "photo": ["hotel-8-1.jpeg", "hotel-8-2.jpeg","hotel-8-3.jpeg","hotel-8-4.jpeg","hotel-8-5.jpeg","hotel-8-6.jpeg"],
+        "description": "Tọa lạc tại thành phố Vũng Tàu, cách Bãi Trước 1,9 km, BOBO Boutique Hotel cung cấp chỗ nghỉ với xe đạp cho khách sử dụng miễn phí, chỗ đỗ xe riêng miễn phí, sảnh khách chung và sòng bạc. Khách sạn 3 sao này có bếp chung, dịch vụ phòng, WiFi miễn phí, lễ tân 24 giờ, máy ATM và dịch vụ thu đổi ngoại tệ cho khách.",
+        "rating": 8.7,
+        "cheapestPrice": 430000,
+        "featured": true
+    },{
+        "name": "Menora Premium Da Nang - Sea Corner Boutique",
+        "type": "resort",
+        "city": "dn",
+        "address": "196 Tran Bach Dang Street, My An Ward, Ngu Hanh Son District, Đà Nẵng, Việt Nam",
+        "distance": "3km",
+        "photo": ["hotel-9-1.jpeg", "hotel-9-2.jpeg","hotel-9-3.jpeg","hotel-9-4.jpeg","hotel-9-5.jpeg","hotel-9-6.jpeg","hotel-9-7.jpeg"],
+        "description": "Quay mặt ra bãi biển ở thành phố Đà Nẵng, Menora Premium Da Nang - Sea Corner Boutique cung cấp chỗ nghỉ 3 sao và có hồ bơi ngoài trời, sân hiên cũng như nhà hàng. Khách sạn 3 sao này có dịch vụ tiền sảnh và bàn đặt tour. Chỗ nghỉ cung cấp dịch vụ lễ tân 24 giờ, dịch vụ đưa đón sân bay, dịch vụ phòng và WiFi miễn phí trong toàn bộ khuôn viên.",
+        "rating": 7.9,
+        "cheapestPrice": 300000,
+        "featured": true
+    },{
+        "name": "Shara Hotel Da Nang",
+        "type": "resort",
+        "city": "dn",
+        "address": "52 - 53 Phan Liem, Ngu Hanh Son, Đà Nẵng, Việt Nam",
+        "distance": "4km",
+        "photo": ["hotel-10-1.jpeg", "hotel-10-2.jpeg","hotel-10-3.jpeg","hotel-10-4.jpeg","hotel-10-5.jpeg","hotel-10-6.jpeg","hotel-10-7.jpeg"],
+        "description": "Tọa lạc tại thành phố Đà Nẵng, cách Bãi biển Mỹ Khê 600 m và Bãi biển Bắc Mỹ An 1,3 km, Shara Hotel Da Nang cung cấp chỗ nghỉ với sảnh khách chung và WiFi miễn phí cũng như chỗ đỗ xe riêng miễn phí cho khách lái xe. Khách sạn 3 sao này có dịch vụ tiền sảnh, bàn đặt tour, dịch vụ phòng, lễ tân 24 giờ và dịch vụ thu đổi ngoại tệ cho khách.",
+        "rating": 9.0,
+        "cheapestPrice": 850000,
+        "featured": true
+    }, 
+    {
+        "name": "Star City Riverside Hotel By Haviland",
+        "type": "resort",
+        "city": "dn",
+        "address": "147-149 Tran Hung Dao, Nai Hien Dong, Son Tra, Đà Nẵng, Việt Nam",
+        "distance": "4km",
+        "photo": ["hotel-11-1.jpeg", "hotel-11-2.jpeg","hotel-11-3.jpeg","hotel-11-4.jpeg","hotel-11-5.jpeg","hotel-11-6.jpeg","hotel-11-7.jpeg","hotel-11-8.jpeg"],
+        "description": "Nằm bên bờ Sông Hàn, Star City Riverside Hotel By Haviland cung cấp không gian sinh hoạt hiện đại với tầm nhìn ra toàn cảnh thành phố Đà Nẵng. Khách sạn này có nhà hàng & quầy bar trong khuôn viên và WiFi miễn phí ở tất cả các khu vực.",
+        "rating": 8.6,
+        "cheapestPrice": 1150000,
+        "featured": true
+    }, {
+        "name": "Haven Hut Hotel",
+        "type": "resort",
+        "city": "hcm",
+        "address": "176 Cô Giang, Quận 1, TP. Hồ Chí Minh, Việt Nam",
+        "distance": "0.9km",
+        "photo": ["hotel-12-1.jpeg", "hotel-12-2.jpeg","hotel-12-3.jpeg","hotel-12-4.jpeg","hotel-12-5.jpeg","hotel-12-6.jpeg","hotel-12-7.jpeg"],
+        "description": "Featuring 2-star accommodation, Haven Hut Hotel is set in Ho Chi Minh City, 1.3 km from Fine Arts Museum and 1.8 km from Takashimaya Vietnam. With free WiFi, this 2-star hotel offers room service and a 24-hour front desk. Free private parking is available and the hotel also offers bike hire for guests who want to explore the surrounding area.",
+        "rating": 9.0,
+        "cheapestPrice": 850000,
+        "featured": true
+    }, {
+        "name": "Shara Hotel Da Nang",
+        "type": "resort",
+        "city": "hcm",
+        "address": "52 - 53 Phan Liem, Ngu Hanh Son, Đà Nẵng, Việt Nam",
+        "distance": "4km",
+        "photo": ["hotel-10-1.jpeg", "hotel-10-2.jpeg","hotel-10-3.jpeg","hotel-10-4.jpeg","hotel-10-5.jpeg","hotel-10-6.jpeg","hotel-10-7.jpeg"],
+        "description": "Tọa lạc tại thành phố Đà Nẵng, cách Bãi biển Mỹ Khê 600 m và Bãi biển Bắc Mỹ An 1,3 km, Shara Hotel Da Nang cung cấp chỗ nghỉ với sảnh khách chung và WiFi miễn phí cũng như chỗ đỗ xe riêng miễn phí cho khách lái xe. Khách sạn 3 sao này có dịch vụ tiền sảnh, bàn đặt tour, dịch vụ phòng, lễ tân 24 giờ và dịch vụ thu đổi ngoại tệ cho khách.",
+        "rating": 9.0,
+        "cheapestPrice": 850000,
+        "featured": true
+    }, {
+        "name": "Shara Hotel Da Nang",
+        "type": "resort",
+        "city": "hcm",
+        "address": "52 - 53 Phan Liem, Ngu Hanh Son, Đà Nẵng, Việt Nam",
+        "distance": "4km",
+        "photo": ["hotel-10-1.jpeg", "hotel-10-2.jpeg","hotel-10-3.jpeg","hotel-10-4.jpeg","hotel-10-5.jpeg","hotel-10-6.jpeg","hotel-10-7.jpeg"],
+        "description": "Tọa lạc tại thành phố Đà Nẵng, cách Bãi biển Mỹ Khê 600 m và Bãi biển Bắc Mỹ An 1,3 km, Shara Hotel Da Nang cung cấp chỗ nghỉ với sảnh khách chung và WiFi miễn phí cũng như chỗ đỗ xe riêng miễn phí cho khách lái xe. Khách sạn 3 sao này có dịch vụ tiền sảnh, bàn đặt tour, dịch vụ phòng, lễ tân 24 giờ và dịch vụ thu đổi ngoại tệ cho khách.",
+        "rating": 9.0,
+        "cheapestPrice": 850000,
+        "featured": true
+    }, {
+        "name": "Shara Hotel Da Nang",
+        "type": "resort",
+        "city": "hcm",
+        "address": "52 - 53 Phan Liem, Ngu Hanh Son, Đà Nẵng, Việt Nam",
+        "distance": "4km",
+        "photo": ["hotel-10-1.jpeg", "hotel-10-2.jpeg","hotel-10-3.jpeg","hotel-10-4.jpeg","hotel-10-5.jpeg","hotel-10-6.jpeg","hotel-10-7.jpeg"],
+        "description": "Tọa lạc tại thành phố Đà Nẵng, cách Bãi biển Mỹ Khê 600 m và Bãi biển Bắc Mỹ An 1,3 km, Shara Hotel Da Nang cung cấp chỗ nghỉ với sảnh khách chung và WiFi miễn phí cũng như chỗ đỗ xe riêng miễn phí cho khách lái xe. Khách sạn 3 sao này có dịch vụ tiền sảnh, bàn đặt tour, dịch vụ phòng, lễ tân 24 giờ và dịch vụ thu đổi ngoại tệ cho khách.",
+        "rating": 9.0,
+        "cheapestPrice": 850000,
+        "featured": true
+    }, {
+        "name": "Shara Hotel Da Nang",
+        "type": "resort",
+        "city": "hcm",
+        "address": "52 - 53 Phan Liem, Ngu Hanh Son, Đà Nẵng, Việt Nam",
+        "distance": "4km",
+        "photo": ["hotel-10-1.jpeg", "hotel-10-2.jpeg","hotel-10-3.jpeg","hotel-10-4.jpeg","hotel-10-5.jpeg","hotel-10-6.jpeg","hotel-10-7.jpeg"],
+        "description": "Tọa lạc tại thành phố Đà Nẵng, cách Bãi biển Mỹ Khê 600 m và Bãi biển Bắc Mỹ An 1,3 km, Shara Hotel Da Nang cung cấp chỗ nghỉ với sảnh khách chung và WiFi miễn phí cũng như chỗ đỗ xe riêng miễn phí cho khách lái xe. Khách sạn 3 sao này có dịch vụ tiền sảnh, bàn đặt tour, dịch vụ phòng, lễ tân 24 giờ và dịch vụ thu đổi ngoại tệ cho khách.",
+        "rating": 9.0,
+        "cheapestPrice": 850000,
+        "featured": true
+    }
+]

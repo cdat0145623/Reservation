@@ -28,6 +28,7 @@ app.options("*", cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/public/img", express.static(path.join(__dirname, "/public/img")));
 app.use("/images", express.static(path.join(__dirname, "/images")));
 app.use("/api/auth", authRoute);
 app.use("/api/hotels", hotelRoute);

@@ -9,18 +9,18 @@ import {
     countByType,
     getHotelRooms,
 } from "../controllers/HotelController.js";
-import { verifyAdmin } from "../helpers/jwt_service.js";
+import { verifyAccessToken, verifyAdmin } from "../helpers/jwt_service.js";
 const router = express.Router();
 
 router.get("/", findAllHotel);
 
 router.get("/find/:id", getHotel);
 
-router.post("/", verifyAdmin, createHotel);
+router.post("/", verifyAccessToken, verifyAdmin, createHotel);
 
-router.put("/:id", verifyAdmin, updateHotel);
+router.put("/:id", verifyAccessToken, verifyAdmin, updateHotel);
 
-router.delete("/:id", verifyAdmin, deleteHotel);
+router.delete("/:id", verifyAccessToken, verifyAdmin, deleteHotel);
 
 router.get("/countByCity", countByCity);
 
