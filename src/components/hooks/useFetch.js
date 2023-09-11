@@ -15,14 +15,15 @@ function useFetch(url) {
             setLoading(true);
             try {
                 const res = await axiosPrivate.get(url);
-                console.log(res.data);
+                // console.log(res.data);
                 setData(res?.data);
             } catch (err) {
                 console.log(err);
                 if (
-                    err?.response?.data?.error?.statusCode === 403 &&
+                    err?.response?.status === 403 &&
                     err?.response?.data?.message === "Session is not valid"
                 ) {
+                    console.log("error");
                     window.localStorage.removeItem("user");
                     navigate("/login");
                 }

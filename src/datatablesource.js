@@ -15,8 +15,10 @@ export const userColumns = [
                     <img
                         className={cx("cell-img")}
                         src={
-                            params.row.image ||
-                            "http://localhost:3003/images/" + params.row.image
+                            params?.row?.image === "default.jpeg"
+                                ? "http://localhost:3003/images/" +
+                                  params?.row?.image
+                                : params?.row?.image
                         }
                         alt="avatar"
                     />

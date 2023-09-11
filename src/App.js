@@ -4,21 +4,17 @@ import {
     Route,
     Navigate,
 } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import List from "./pages/List/List";
-import Single from "./pages/Single/Single";
+import { Fragment } from "react";
+import { privateRoutes } from "./routes";
+import DefaultLayout from "./components/layout/DefaultLayout/DefaultLayout";
+import config from "./config/config";
 import Login from "./pages/Login/Login";
-import NewUser from "./pages/newUser/NewUser";
+import { AuthContext } from "./components/context/AuthContext";
+import { useContext } from "react";
+import jwt_decode from "jwt-decode";
 import styles from "./components/style/dark.module.scss";
 import classNames from "classnames/bind";
-import "./components/Navbar/Navbar.module.scss";
-import { useContext } from "react";
 import { DarkModeContext } from "./components/context/DarkModeContext";
-import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
-import NewRoom from "./pages/newRoom/NewRoom";
-import NewHotel from "./pages/newHotel/NewHotel";
-import { AuthContext } from "./components/context/AuthContext";
-import jwt_decode from "jwt-decode";
 
 const cx = classNames.bind(styles);
 
@@ -31,93 +27,57 @@ function App() {
         if (user?.length > 4) {
             const decodedAccessToken = jwt_decode(user);
             if (decodedAccessToken?.isAdmin) return children;
+            window.localStorage.removeItem("user");
             return <Navigate to="/login" />;
         } else {
+            window.localStorage.removeItem("user");
             return <Navigate to="/login" />;
         }
     };
 
     return (
-        <div className={darkMode ? `${cx("app", "dark")}` : cx("app")}>
-            <Router>
+        <Router>
+            <div className={darkMode ? `${cx("app", "dark")}` : cx("app")}>
                 <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route
-                        path="/"
-                        element={
-                            <ProtectRoute>
-                                <Home />
-                            </ProtectRoute>
+                    <Route path={config.routes.login} element={<Login />} />
+                    {privateRoutes.map((route, index) => {
+                        let Layout = DefaultLayout;
+
+                        if (route.layout) {
+                            Layout = route.layout;
+                        } else if (route.layout === null) {
+                            Layout = Fragment;
                         }
-                    />
-                    <Route
-                        path="/users"
-                        element={
-                            <ProtectRoute>
-                                <List
-                                    columns={userColumns}
-                                    title="Add New User"
-                                />
-                            </ProtectRoute>
-                        }
-                    />
-                    <Route
-                        path="/users/:userId"
-                        element={
-                            <ProtectRoute>
-                                <Single />
-                            </ProtectRoute>
-                        }
-                    />
-                    <Route
-                        path="/users/new"
-                        element={
-                            <ProtectRoute>
-                                <NewUser />
-                            </ProtectRoute>
-                        }
-                    />
-                    <Route
-                        path="/hotels"
-                        element={
-                            <ProtectRoute>
-                                <List
-                                    columns={hotelColumns}
-                                    title="Add New Hotel"
-                                />
-                            </ProtectRoute>
-                        }
-                    />
-                    <Route
-                        path="/hotels/new"
-                        element={
-                            <ProtectRoute>
-                                <NewHotel />
-                            </ProtectRoute>
-                        }
-                    />
-                    <Route
-                        path="/rooms"
-                        element={
-                            <ProtectRoute>
-                                <List
-                                    columns={roomColumns}
-                                    title="Add New Room"
-                                />
-                            </ProtectRoute>
-                        }
-                    />
-                    <Route
-                        path="/rooms/new"
-                        element={
-                            <ProtectRoute>
-                                <NewRoom />
-                            </ProtectRoute>
-                        }
-                    />
+
+                        const Page = route.component;
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <ProtectRoute>
+                                        <Layout>
+                                            <Page
+                                                columns={
+                                                    route.columns
+                                                        ? route.columns
+                                                        : null
+                                                }
+                                                title={
+                                                    route.title
+                                                        ? route.title
+                                                        : null
+                                                }
+                                            />
+                                        </Layout>
+                                    </ProtectRoute>
+                                }
+                            />
+                        );
+                    })}
                 </Routes>
-            </Router>
-        </div>
+            </div>
+        </Router>
     );
 }
 

@@ -1,7 +1,5 @@
 import classnames from "classnames/bind";
 import styles from "./NewHotel.module.scss";
-import Sidebar from "~/components/Sidebar/Sidebar";
-import Navbar from "~/components/Navbar/Navbar";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
@@ -108,8 +106,7 @@ function NewHotel() {
 
     useEffect(() => {
         // eslint-disable-next-line
-        console.log(selectedRooms);
-
+        // console.log(selectedRooms);
         selectedRooms.length > 0
             ? setValidSelectedRooms(true)
             : setValidSelectedRooms(false);
@@ -204,573 +201,516 @@ function NewHotel() {
 
     return (
         <div className={cx("wrapper")}>
-            <Sidebar />
-            <div className={cx("container")}>
-                <Navbar />
-                <div className={cx("top")}>
-                    <h1 className={cx("title")}>Add new Rooms</h1>
+            <div className={cx("top")}>
+                <h1 className={cx("title")}>Add new Rooms</h1>
+            </div>
+            <div className={cx("bottom")}>
+                <div className={cx("left")}>
+                    <img
+                        src={
+                            files?.length > 0
+                                ? URL.createObjectURL(files[0])
+                                : publicImage + "default.jpeg"
+                        }
+                        alt=""
+                        className={cx("image")}
+                    />
                 </div>
-                <div className={cx("bottom")}>
-                    <div className={cx("left")}>
-                        <img
-                            src={
-                                files?.length > 0
-                                    ? URL.createObjectURL(files[0])
-                                    : publicImage + "default.jpeg"
-                            }
-                            alt=""
-                            className={cx("image")}
-                        />
-                    </div>
-                    <div className={cx("right")}>
-                        <form className={cx("form")}>
-                            <div className={cx("formItem")}>
-                                <label
-                                    htmlFor="file"
-                                    className={cx("formLabel")}
-                                >
-                                    Image:{" "}
-                                    <DriveFolderUploadIcon
-                                        className={cx("icon")}
-                                    />
-                                </label>
+                <div className={cx("right")}>
+                    <form className={cx("form")}>
+                        <div className={cx("formItem")}>
+                            <label htmlFor="file" className={cx("formLabel")}>
+                                Image:{" "}
+                                <DriveFolderUploadIcon className={cx("icon")} />
+                            </label>
+                            <input
+                                id="file"
+                                type="file"
+                                className={cx("formInput")}
+                                multiple
+                                style={{ display: "none" }}
+                                onChange={(e) => setFiles(e.target.files)}
+                            />
+                        </div>
+
+                        <div className={cx("formItem")}>
+                            <label className={cx("formLabel")}>Name:</label>
+                            <div className={cx("wrapperInput")}>
                                 <input
-                                    id="file"
-                                    type="file"
                                     className={cx("formInput")}
-                                    multiple
-                                    style={{ display: "none" }}
-                                    onChange={(e) => setFiles(e.target.files)}
+                                    type="text"
+                                    id="name"
+                                    autoComplete="off"
+                                    onChange={(e) => setName(e.target.value)}
+                                    value={name}
+                                    required
+                                    aria-invalid={validName ? "false" : "true"}
+                                    aria-describedby="uidnote"
+                                    onFocus={() => setNameFocus(true)}
+                                    onBlur={() => setNameFocus(false)}
+                                />
+                                <CheckOutlinedIcon
+                                    className={
+                                        validName ? cx("valid") : cx("hide")
+                                    }
+                                />
+                                <CloseOutlinedIcon
+                                    className={
+                                        validName || !name
+                                            ? cx("hide")
+                                            : cx("invalid")
+                                    }
                                 />
                             </div>
+                            <p
+                                id="uidnote"
+                                className={
+                                    nameFocus && name && !validName
+                                        ? cx("instructions")
+                                        : cx("offscreen")
+                                }
+                            >
+                                <ErrorOutlineOutlinedIcon
+                                    className={cx("errorModal-icon")}
+                                />
+                                4 to 30 characters.
+                                <br />
+                                Must begin with a letter.
+                                <br />
+                                Letters, numbers, underscores allowed.
+                            </p>
+                        </div>
 
-                            <div className={cx("formItem")}>
-                                <label className={cx("formLabel")}>Name:</label>
-                                <div className={cx("wrapperInput")}>
-                                    <input
-                                        className={cx("formInput")}
-                                        type="text"
-                                        id="name"
-                                        autoComplete="off"
-                                        onChange={(e) =>
-                                            setName(e.target.value)
-                                        }
-                                        value={name}
-                                        required
-                                        aria-invalid={
-                                            validName ? "false" : "true"
-                                        }
-                                        aria-describedby="uidnote"
-                                        onFocus={() => setNameFocus(true)}
-                                        onBlur={() => setNameFocus(false)}
-                                    />
-                                    <CheckOutlinedIcon
-                                        className={
-                                            validName ? cx("valid") : cx("hide")
-                                        }
-                                    />
-                                    <CloseOutlinedIcon
-                                        className={
-                                            validName || !name
-                                                ? cx("hide")
-                                                : cx("invalid")
-                                        }
-                                    />
-                                </div>
-                                <p
-                                    id="uidnote"
+                        <div className={cx("formItem")}>
+                            <label className={cx("formLabel")}>Type:</label>
+                            <div className={cx("wrapperInput")}>
+                                <input
+                                    className={cx("formInput")}
+                                    type="text"
+                                    id="type"
+                                    autoComplete="off"
+                                    onChange={(e) => setType(e.target.value)}
+                                    value={type}
+                                    required
+                                    aria-invalid={validType ? "false" : "true"}
+                                    aria-describedby="uidnote"
+                                    onFocus={() => setTypeFocus(true)}
+                                    onBlur={() => setTypeFocus(false)}
+                                />
+                                <CheckOutlinedIcon
                                     className={
-                                        nameFocus && name && !validName
-                                            ? cx("instructions")
-                                            : cx("offscreen")
+                                        validType ? cx("valid") : cx("hide")
                                     }
-                                >
-                                    <ErrorOutlineOutlinedIcon
-                                        className={cx("errorModal-icon")}
-                                    />
-                                    4 to 30 characters.
-                                    <br />
-                                    Must begin with a letter.
-                                    <br />
-                                    Letters, numbers, underscores allowed.
-                                </p>
-                            </div>
-
-                            <div className={cx("formItem")}>
-                                <label className={cx("formLabel")}>Type:</label>
-                                <div className={cx("wrapperInput")}>
-                                    <input
-                                        className={cx("formInput")}
-                                        type="text"
-                                        id="type"
-                                        autoComplete="off"
-                                        onChange={(e) =>
-                                            setType(e.target.value)
-                                        }
-                                        value={type}
-                                        required
-                                        aria-invalid={
-                                            validType ? "false" : "true"
-                                        }
-                                        aria-describedby="uidnote"
-                                        onFocus={() => setTypeFocus(true)}
-                                        onBlur={() => setTypeFocus(false)}
-                                    />
-                                    <CheckOutlinedIcon
-                                        className={
-                                            validType ? cx("valid") : cx("hide")
-                                        }
-                                    />
-                                    <CloseOutlinedIcon
-                                        className={
-                                            validType || !type
-                                                ? cx("hide")
-                                                : cx("invalid")
-                                        }
-                                    />
-                                </div>
-                                <p
-                                    id="uidnote"
+                                />
+                                <CloseOutlinedIcon
                                     className={
-                                        typeFocus && type && !validType
-                                            ? cx("instructions")
-                                            : cx("offscreen")
+                                        validType || !type
+                                            ? cx("hide")
+                                            : cx("invalid")
                                     }
-                                >
-                                    <ErrorOutlineOutlinedIcon
-                                        className={cx("errorModal-icon")}
-                                    />
-                                    4 to 30 characters.
-                                    <br />
-                                    Must begin with a letter.
-                                    <br />
-                                    Letters, numbers, underscores allowed.
-                                </p>
+                                />
                             </div>
+                            <p
+                                id="uidnote"
+                                className={
+                                    typeFocus && type && !validType
+                                        ? cx("instructions")
+                                        : cx("offscreen")
+                                }
+                            >
+                                <ErrorOutlineOutlinedIcon
+                                    className={cx("errorModal-icon")}
+                                />
+                                4 to 30 characters.
+                                <br />
+                                Must begin with a letter.
+                                <br />
+                                Letters, numbers, underscores allowed.
+                            </p>
+                        </div>
 
-                            <div className={cx("formItem")}>
-                                <label className={cx("formLabel")}>
-                                    Distance:
-                                </label>
-                                <div className={cx("wrapperInput")}>
-                                    <input
-                                        className={cx("formInput")}
-                                        type="text"
-                                        id="distance"
-                                        autoComplete="off"
-                                        onChange={(e) =>
-                                            setDistance(e.target.value)
-                                        }
-                                        value={distance}
-                                        required
-                                        aria-invalid={
-                                            validDistance ? "false" : "true"
-                                        }
-                                        aria-describedby="uidnote"
-                                        onFocus={() => setDistanceFocus(true)}
-                                        onBlur={() => setDistanceFocus(false)}
-                                    />
-                                    <CheckOutlinedIcon
-                                        className={
-                                            validDistance
-                                                ? cx("valid")
-                                                : cx("hide")
-                                        }
-                                    />
-                                    <CloseOutlinedIcon
-                                        className={
-                                            validDistance || !distance
-                                                ? cx("hide")
-                                                : cx("invalid")
-                                        }
-                                    />
-                                </div>
-                                <p
-                                    id="uidnote"
+                        <div className={cx("formItem")}>
+                            <label className={cx("formLabel")}>Distance:</label>
+                            <div className={cx("wrapperInput")}>
+                                <input
+                                    className={cx("formInput")}
+                                    type="text"
+                                    id="distance"
+                                    autoComplete="off"
+                                    onChange={(e) =>
+                                        setDistance(e.target.value)
+                                    }
+                                    value={distance}
+                                    required
+                                    aria-invalid={
+                                        validDistance ? "false" : "true"
+                                    }
+                                    aria-describedby="uidnote"
+                                    onFocus={() => setDistanceFocus(true)}
+                                    onBlur={() => setDistanceFocus(false)}
+                                />
+                                <CheckOutlinedIcon
                                     className={
-                                        distanceFocus &&
-                                        distance &&
-                                        !validDistance
-                                            ? cx("instructions")
-                                            : cx("offscreen")
+                                        validDistance ? cx("valid") : cx("hide")
                                     }
-                                >
-                                    <ErrorOutlineOutlinedIcon
-                                        className={cx("errorModal-icon")}
-                                    />
-                                    1 to 10 characters.
-                                    <br />
-                                    Must begin with a letter.
-                                </p>
-                            </div>
-
-                            <div className={cx("formItem")}>
-                                <label className={cx("formLabel")}>
-                                    Title:
-                                </label>
-                                <div className={cx("wrapperInput")}>
-                                    <input
-                                        className={cx("formInput")}
-                                        type="text"
-                                        id="title"
-                                        autoComplete="off"
-                                        onChange={(e) =>
-                                            setTitle(e.target.value)
-                                        }
-                                        value={title}
-                                        required
-                                        aria-invalid={
-                                            validTitle ? "false" : "true"
-                                        }
-                                        aria-describedby="uidnote"
-                                        onFocus={() => setTitleFocus(true)}
-                                        onBlur={() => setTitleFocus(false)}
-                                    />
-                                    <CheckOutlinedIcon
-                                        className={
-                                            validTitle
-                                                ? cx("valid")
-                                                : cx("hide")
-                                        }
-                                    />
-                                    <CloseOutlinedIcon
-                                        className={
-                                            validTitle || !title
-                                                ? cx("hide")
-                                                : cx("invalid")
-                                        }
-                                    />
-                                </div>
-                                <p
-                                    id="uidnote"
+                                />
+                                <CloseOutlinedIcon
                                     className={
-                                        titleFocus && title && !validTitle
-                                            ? cx("instructions")
-                                            : cx("offscreen")
+                                        validDistance || !distance
+                                            ? cx("hide")
+                                            : cx("invalid")
                                     }
-                                >
-                                    <ErrorOutlineOutlinedIcon
-                                        className={cx("errorModal-icon")}
-                                    />
-                                    1 to 10 characters.
-                                    <br />
-                                    Must begin with a letter.
-                                </p>
+                                />
                             </div>
+                            <p
+                                id="uidnote"
+                                className={
+                                    distanceFocus && distance && !validDistance
+                                        ? cx("instructions")
+                                        : cx("offscreen")
+                                }
+                            >
+                                <ErrorOutlineOutlinedIcon
+                                    className={cx("errorModal-icon")}
+                                />
+                                1 to 10 characters.
+                                <br />
+                                Must begin with a letter.
+                            </p>
+                        </div>
 
-                            <div className={cx("formItem")}>
-                                <label className={cx("formLabel")}>
-                                    Description:
-                                </label>
-                                <div className={cx("wrapperInput")}>
-                                    <input
-                                        className={cx("formInput")}
-                                        type="text"
-                                        id="description"
-                                        autoComplete="off"
-                                        onChange={(e) =>
-                                            setDescription(e.target.value)
-                                        }
-                                        value={description}
-                                        required
-                                        aria-invalid={
-                                            validDescription ? "false" : "true"
-                                        }
-                                        aria-describedby="uidnote"
-                                        onFocus={() =>
-                                            setDescriptionFocus(true)
-                                        }
-                                        onBlur={() =>
-                                            setDescriptionFocus(false)
-                                        }
-                                    />
-                                    <CheckOutlinedIcon
-                                        className={
-                                            validDescription
-                                                ? cx("valid")
-                                                : cx("hide")
-                                        }
-                                    />
-                                    <CloseOutlinedIcon
-                                        className={
-                                            validDescription || !description
-                                                ? cx("hide")
-                                                : cx("invalid")
-                                        }
-                                    />
-                                </div>
-                                <p
-                                    id="uidnote"
+                        <div className={cx("formItem")}>
+                            <label className={cx("formLabel")}>Title:</label>
+                            <div className={cx("wrapperInput")}>
+                                <input
+                                    className={cx("formInput")}
+                                    type="text"
+                                    id="title"
+                                    autoComplete="off"
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    value={title}
+                                    required
+                                    aria-invalid={validTitle ? "false" : "true"}
+                                    aria-describedby="uidnote"
+                                    onFocus={() => setTitleFocus(true)}
+                                    onBlur={() => setTitleFocus(false)}
+                                />
+                                <CheckOutlinedIcon
                                     className={
-                                        descriptionFocus &&
-                                        description &&
-                                        !validDescription
-                                            ? cx("instructions")
-                                            : cx("offscreen")
+                                        validTitle ? cx("valid") : cx("hide")
                                     }
-                                >
-                                    <ErrorOutlineOutlinedIcon
-                                        className={cx("errorModal-icon")}
-                                    />
-                                    1 to 10 characters.
-                                    <br />
-                                    Must begin with a letter.
-                                </p>
-                            </div>
-
-                            <div className={cx("formItem")}>
-                                <label className={cx("formLabel")}>
-                                    Country:
-                                </label>
-                                <div className={cx("wrapperInput")}>
-                                    <input
-                                        className={cx("formInput")}
-                                        type="text"
-                                        id="country"
-                                        autoComplete="off"
-                                        onChange={(e) =>
-                                            setCountry(e.target.value)
-                                        }
-                                        value={country}
-                                        required
-                                        aria-invalid={
-                                            validCountry ? "false" : "true"
-                                        }
-                                        aria-describedby="uidnote"
-                                        onFocus={() => setCountryFocus(true)}
-                                        onBlur={() => setCountryFocus(false)}
-                                    />
-                                    <CheckOutlinedIcon
-                                        className={
-                                            validCountry
-                                                ? cx("valid")
-                                                : cx("hide")
-                                        }
-                                    />
-                                    <CloseOutlinedIcon
-                                        className={
-                                            validCountry || !country
-                                                ? cx("hide")
-                                                : cx("invalid")
-                                        }
-                                    />
-                                </div>
-                                <p
-                                    id="uidnote"
+                                />
+                                <CloseOutlinedIcon
                                     className={
-                                        countryFocus && country && !validCountry
-                                            ? cx("instructions")
-                                            : cx("offscreen")
+                                        validTitle || !title
+                                            ? cx("hide")
+                                            : cx("invalid")
                                     }
-                                >
-                                    <ErrorOutlineOutlinedIcon
-                                        className={cx("errorModal-icon")}
-                                    />
-                                    1 to 10 characters.
-                                    <br />
-                                    Must begin with a letter.
-                                </p>
+                                />
                             </div>
+                            <p
+                                id="uidnote"
+                                className={
+                                    titleFocus && title && !validTitle
+                                        ? cx("instructions")
+                                        : cx("offscreen")
+                                }
+                            >
+                                <ErrorOutlineOutlinedIcon
+                                    className={cx("errorModal-icon")}
+                                />
+                                1 to 10 characters.
+                                <br />
+                                Must begin with a letter.
+                            </p>
+                        </div>
 
-                            <div className={cx("formItem")}>
-                                <label className={cx("formLabel")}>City:</label>
-                                <div className={cx("wrapperInput")}>
-                                    <input
-                                        className={cx("formInput")}
-                                        type="text"
-                                        id="city"
-                                        autoComplete="off"
-                                        onChange={(e) =>
-                                            setCity(e.target.value)
-                                        }
-                                        value={city}
-                                        required
-                                        aria-invalid={
-                                            validCity ? "false" : "true"
-                                        }
-                                        aria-describedby="uidnote"
-                                        onFocus={() => setCityFocus(true)}
-                                        onBlur={() => setCityFocus(false)}
-                                    />
-                                    <CheckOutlinedIcon
-                                        className={
-                                            validCity ? cx("valid") : cx("hide")
-                                        }
-                                    />
-                                    <CloseOutlinedIcon
-                                        className={
-                                            validCity || !city
-                                                ? cx("hide")
-                                                : cx("invalid")
-                                        }
-                                    />
-                                </div>
-                                <p
-                                    id="uidnote"
+                        <div className={cx("formItem")}>
+                            <label className={cx("formLabel")}>
+                                Description:
+                            </label>
+                            <div className={cx("wrapperInput")}>
+                                <input
+                                    className={cx("formInput")}
+                                    type="text"
+                                    id="description"
+                                    autoComplete="off"
+                                    onChange={(e) =>
+                                        setDescription(e.target.value)
+                                    }
+                                    value={description}
+                                    required
+                                    aria-invalid={
+                                        validDescription ? "false" : "true"
+                                    }
+                                    aria-describedby="uidnote"
+                                    onFocus={() => setDescriptionFocus(true)}
+                                    onBlur={() => setDescriptionFocus(false)}
+                                />
+                                <CheckOutlinedIcon
                                     className={
-                                        cityFocus && city && !validCity
-                                            ? cx("instructions")
-                                            : cx("offscreen")
+                                        validDescription
+                                            ? cx("valid")
+                                            : cx("hide")
                                     }
-                                >
-                                    <ErrorOutlineOutlinedIcon
-                                        className={cx("errorModal-icon")}
-                                    />
-                                    1 to 10 characters.
-                                    <br />
-                                    Must begin with a letter.
-                                </p>
-                            </div>
-
-                            <div className={cx("formItem")}>
-                                <label className={cx("formLabel")}>
-                                    CheapestPrice:
-                                </label>
-                                <div className={cx("wrapperInput")}>
-                                    <input
-                                        className={cx("formInput")}
-                                        type="text"
-                                        id="cheapestPrice"
-                                        autoComplete="off"
-                                        onChange={(e) =>
-                                            setCheapestPrice(e.target.value)
-                                        }
-                                        value={cheapestPrice}
-                                        required
-                                        aria-invalid={
-                                            validCheapestPrice
-                                                ? "false"
-                                                : "true"
-                                        }
-                                        aria-describedby="uidnote"
-                                        onFocus={() =>
-                                            setCheapestPriceFocus(true)
-                                        }
-                                        onBlur={() =>
-                                            setCheapestPriceFocus(false)
-                                        }
-                                    />
-                                    <CheckOutlinedIcon
-                                        className={
-                                            validCheapestPrice
-                                                ? cx("valid")
-                                                : cx("hide")
-                                        }
-                                    />
-                                    <CloseOutlinedIcon
-                                        className={
-                                            validCheapestPrice || !cheapestPrice
-                                                ? cx("hide")
-                                                : cx("invalid")
-                                        }
-                                    />
-                                </div>
-                                <p
-                                    id="uidnote"
+                                />
+                                <CloseOutlinedIcon
                                     className={
-                                        cheapestPriceFocus &&
-                                        cheapestPrice &&
-                                        !validCheapestPrice
-                                            ? cx("instructions")
-                                            : cx("offscreen")
+                                        validDescription || !description
+                                            ? cx("hide")
+                                            : cx("invalid")
                                     }
-                                >
-                                    <ErrorOutlineOutlinedIcon
-                                        className={cx("errorModal-icon")}
-                                    />
-                                    1 to 10 characters.
-                                    <br />
-                                    Must begin with a letter.
-                                </p>
+                                />
                             </div>
+                            <p
+                                id="uidnote"
+                                className={
+                                    descriptionFocus &&
+                                    description &&
+                                    !validDescription
+                                        ? cx("instructions")
+                                        : cx("offscreen")
+                                }
+                            >
+                                <ErrorOutlineOutlinedIcon
+                                    className={cx("errorModal-icon")}
+                                />
+                                1 to 10 characters.
+                                <br />
+                                Must begin with a letter.
+                            </p>
+                        </div>
 
-                            <div className={cx("formItem")}>
-                                <label className={cx("formLabel")}>
-                                    Featured
-                                </label>
-                                <select
-                                    id="featured"
-                                    // onChange={handleChange}
-                                    className={cx("featured-select")}
-                                >
-                                    <option
-                                        className={cx("featured-option")}
-                                        value={false}
-                                    >
-                                        No
-                                    </option>
-                                    <option
-                                        className={cx("featured-option")}
-                                        value={true}
-                                    >
-                                        Yes
-                                    </option>
-                                </select>
+                        <div className={cx("formItem")}>
+                            <label className={cx("formLabel")}>Country:</label>
+                            <div className={cx("wrapperInput")}>
+                                <input
+                                    className={cx("formInput")}
+                                    type="text"
+                                    id="country"
+                                    autoComplete="off"
+                                    onChange={(e) => setCountry(e.target.value)}
+                                    value={country}
+                                    required
+                                    aria-invalid={
+                                        validCountry ? "false" : "true"
+                                    }
+                                    aria-describedby="uidnote"
+                                    onFocus={() => setCountryFocus(true)}
+                                    onBlur={() => setCountryFocus(false)}
+                                />
+                                <CheckOutlinedIcon
+                                    className={
+                                        validCountry ? cx("valid") : cx("hide")
+                                    }
+                                />
+                                <CloseOutlinedIcon
+                                    className={
+                                        validCountry || !country
+                                            ? cx("hide")
+                                            : cx("invalid")
+                                    }
+                                />
                             </div>
-                            <div className={cx("selectRooms")}>
-                                <label className={cx("formLabel")}>
-                                    Rooms
-                                    <CheckOutlinedIcon
-                                        className={
-                                            validSelectedRooms
-                                                ? cx("roomValid")
-                                                : cx("hide")
-                                        }
-                                    />
-                                </label>
-                                {loading
-                                    ? "Loading..."
-                                    : data &&
-                                      data.map((room) => (
-                                          <div
-                                              className={cx("room")}
-                                              key={room._id}
+                            <p
+                                id="uidnote"
+                                className={
+                                    countryFocus && country && !validCountry
+                                        ? cx("instructions")
+                                        : cx("offscreen")
+                                }
+                            >
+                                <ErrorOutlineOutlinedIcon
+                                    className={cx("errorModal-icon")}
+                                />
+                                1 to 10 characters.
+                                <br />
+                                Must begin with a letter.
+                            </p>
+                        </div>
+
+                        <div className={cx("formItem")}>
+                            <label className={cx("formLabel")}>City:</label>
+                            <div className={cx("wrapperInput")}>
+                                <input
+                                    className={cx("formInput")}
+                                    type="text"
+                                    id="city"
+                                    autoComplete="off"
+                                    onChange={(e) => setCity(e.target.value)}
+                                    value={city}
+                                    required
+                                    aria-invalid={validCity ? "false" : "true"}
+                                    aria-describedby="uidnote"
+                                    onFocus={() => setCityFocus(true)}
+                                    onBlur={() => setCityFocus(false)}
+                                />
+                                <CheckOutlinedIcon
+                                    className={
+                                        validCity ? cx("valid") : cx("hide")
+                                    }
+                                />
+                                <CloseOutlinedIcon
+                                    className={
+                                        validCity || !city
+                                            ? cx("hide")
+                                            : cx("invalid")
+                                    }
+                                />
+                            </div>
+                            <p
+                                id="uidnote"
+                                className={
+                                    cityFocus && city && !validCity
+                                        ? cx("instructions")
+                                        : cx("offscreen")
+                                }
+                            >
+                                <ErrorOutlineOutlinedIcon
+                                    className={cx("errorModal-icon")}
+                                />
+                                1 to 10 characters.
+                                <br />
+                                Must begin with a letter.
+                            </p>
+                        </div>
+
+                        <div className={cx("formItem")}>
+                            <label className={cx("formLabel")}>
+                                CheapestPrice:
+                            </label>
+                            <div className={cx("wrapperInput")}>
+                                <input
+                                    className={cx("formInput")}
+                                    type="text"
+                                    id="cheapestPrice"
+                                    autoComplete="off"
+                                    onChange={(e) =>
+                                        setCheapestPrice(e.target.value)
+                                    }
+                                    value={cheapestPrice}
+                                    required
+                                    aria-invalid={
+                                        validCheapestPrice ? "false" : "true"
+                                    }
+                                    aria-describedby="uidnote"
+                                    onFocus={() => setCheapestPriceFocus(true)}
+                                    onBlur={() => setCheapestPriceFocus(false)}
+                                />
+                                <CheckOutlinedIcon
+                                    className={
+                                        validCheapestPrice
+                                            ? cx("valid")
+                                            : cx("hide")
+                                    }
+                                />
+                                <CloseOutlinedIcon
+                                    className={
+                                        validCheapestPrice || !cheapestPrice
+                                            ? cx("hide")
+                                            : cx("invalid")
+                                    }
+                                />
+                            </div>
+                            <p
+                                id="uidnote"
+                                className={
+                                    cheapestPriceFocus &&
+                                    cheapestPrice &&
+                                    !validCheapestPrice
+                                        ? cx("instructions")
+                                        : cx("offscreen")
+                                }
+                            >
+                                <ErrorOutlineOutlinedIcon
+                                    className={cx("errorModal-icon")}
+                                />
+                                1 to 10 characters.
+                                <br />
+                                Must begin with a letter.
+                            </p>
+                        </div>
+
+                        <div className={cx("formItem")}>
+                            <label className={cx("formLabel")}>Featured</label>
+                            <select
+                                id="featured"
+                                // onChange={handleChange}
+                                className={cx("featured-select")}
+                            >
+                                <option
+                                    className={cx("featured-option")}
+                                    value={false}
+                                >
+                                    No
+                                </option>
+                                <option
+                                    className={cx("featured-option")}
+                                    value={true}
+                                >
+                                    Yes
+                                </option>
+                            </select>
+                        </div>
+                        <div className={cx("selectRooms")}>
+                            <label className={cx("formLabel")}>
+                                Rooms
+                                <CheckOutlinedIcon
+                                    className={
+                                        validSelectedRooms
+                                            ? cx("roomValid")
+                                            : cx("hide")
+                                    }
+                                />
+                            </label>
+                            {loading
+                                ? "Loading..."
+                                : data &&
+                                  data.map((room) => (
+                                      <div
+                                          className={cx("room")}
+                                          key={room._id}
+                                      >
+                                          <input
+                                              type="checkbox"
+                                              value={room._id}
+                                              onClick={handleSelect}
+                                              className={cx("selectRoom-input")}
+                                              aria-invalid={
+                                                  validSelectedRooms
+                                                      ? "false"
+                                                      : "true"
+                                              }
+                                          />
+
+                                          <label
+                                              className={cx("selectRoom-label")}
                                           >
-                                              <input
-                                                  type="checkbox"
-                                                  value={room._id}
-                                                  onClick={handleSelect}
-                                                  className={cx(
-                                                      "selectRoom-input"
-                                                  )}
-                                                  aria-invalid={
-                                                      validSelectedRooms
-                                                          ? "false"
-                                                          : "true"
-                                                  }
-                                              />
-
-                                              <label
-                                                  className={cx(
-                                                      "selectRoom-label"
-                                                  )}
-                                              >
-                                                  {room.title}
-                                              </label>
-                                          </div>
-                                      ))}
-                            </div>
-                        </form>
-                        <button
-                            onClick={handleSubmit}
-                            className={cx("button")}
-                            disabled={
-                                !validName ||
-                                !validCheapestPrice ||
-                                !validTitle ||
-                                !validDescription ||
-                                !validDistance ||
-                                !validCountry ||
-                                !validCity ||
-                                !validSelectedRooms ||
-                                !validImage
-                                    ? true
-                                    : false
-                            }
-                        >
-                            Send
-                        </button>
-                    </div>
+                                              {room.title}
+                                          </label>
+                                      </div>
+                                  ))}
+                        </div>
+                    </form>
+                    <button
+                        onClick={handleSubmit}
+                        className={cx("button")}
+                        disabled={
+                            !validName ||
+                            !validCheapestPrice ||
+                            !validTitle ||
+                            !validDescription ||
+                            !validDistance ||
+                            !validCountry ||
+                            !validCity ||
+                            !validSelectedRooms ||
+                            !validImage
+                                ? true
+                                : false
+                        }
+                    >
+                        Send
+                    </button>
                 </div>
             </div>
         </div>
